@@ -1,0 +1,12 @@
+import pygame
+
+SCREEN_WIDTH = 1280
+SCREEN_HEIGHT = 720
+DISTANCE_BEETWEEN_BUTTONS = 100
+
+pygame.init()
+SCREEN = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+
+
+__all__ = ['SCREEN_WIDTH', 'SCREEN_HEIGHT',
+           'DISTANCE_BEETWEEN_BUTTONS', 'SCREEN']
