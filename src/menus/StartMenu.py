@@ -11,6 +11,8 @@ from buttons.Play import *
 from buttons.PlayerOne import *
 from buttons.PlayerTwo import *
 
+from SettingMenu import settingsMenu
+
 # Can be changed depending on what resolution we want
 # Upper Text
 
@@ -22,7 +24,6 @@ titleSurface = font.render(titleText, True, YELLOW)
 titleRect = titleSurface.get_rect()
 titleRect.center = (xPosTitle, yPosTitle)
 
-running = True
 
 def isCursorOnButtons(mouseCoord):
     if (quitButton.isCursorOn(mouseCoord)):
@@ -58,9 +59,14 @@ def drawAllButtons():
     playerOneButton.drawButton()
     playerTwoButton.drawButton()
 
-while running:
+running = True
 
-    for event in pygame.event.get():
+while running:
+    
+    SCREEN.blit(BACK_GROUND_JPEG, (0, 0))
+    SCREEN.blit(titleSurface, titleRect)
+    
+    for event in pygame.event.get():        
         
         if event.type == pygame.QUIT:
             running = False
@@ -76,8 +82,8 @@ while running:
                     running = False
 
                 if (settingsButton.isCursorOn(mouseCoord)):
-                    #TODO new game loop for setting menu
-                    pass        
+                    settingsMenu()
+ 
             
                 if (playButton.isCursorOn(mouseCoord)):
                     #TODO new game loop (actual game)
@@ -91,12 +97,11 @@ while running:
                     #TODO new Menu for player TWO (similar to Player One)
                     pass
     
-    SCREEN.blit(BACK_GROUND_JPEG, (0, 0))
-    SCREEN.blit(titleSurface, titleRect)
+    
 
     drawAllButtons()
 
-    pygame.display.flip()
+    pygame.display.update()
         
              
 pygame.quit()
