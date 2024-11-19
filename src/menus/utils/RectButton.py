@@ -4,7 +4,7 @@ import pygame
    button and it s methods
 """
 class RectButton():
-    def __init__(self, screen, xPos, yPos, path):
+    def __init__(self, screen, xPos, yPos, image):
         """Constructor for the button class
         
         Args:
@@ -16,7 +16,7 @@ class RectButton():
         self.screen = screen
         self.xPos = xPos
         self.yPos = yPos
-        self.image = pygame.image.load(path)
+        self.image = image
         self.imageRect = self.image.get_rect(center=(yPos, xPos))
     
     def isCursorOn(self, coords):
