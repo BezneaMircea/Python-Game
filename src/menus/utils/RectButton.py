@@ -39,6 +39,13 @@ class RectButton():
         self.screen.blit(self.image, self.imageRect)
         self.screen.blit(self.textSurface, self.textRect)
 
+    def changeTextColor(self, color):
+        self.color = color
+        textSurface = self.font.render(self.text, True, color)
+        textRect = textSurface.get_rect(center=self.imageRect.center)
+        self.textSurface = textSurface
+        self.textRect = textRect
+
     
     def addTextToButton(self, text, font, color):
         """ Method used to add text in a button
@@ -48,9 +55,12 @@ class RectButton():
             font (pygame.font.Font): the font 
             color (tuple (r, g, b)): color of text
         """
+        self.text = text
+        self.color = color
+        self.font = font
+        
         textSurface = font.render(text, True, color)
         textRect = textSurface.get_rect(center=self.imageRect.center)
-        self.color = color
         self.textSurface = textSurface
         self.textRect = textRect
 
