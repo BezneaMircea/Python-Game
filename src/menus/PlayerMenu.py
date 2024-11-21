@@ -7,9 +7,6 @@ from utils.pictures.Pictures import *
 
 from buttons.general_buttons.back import *
 
-from game.GameSettup import *
-
-
 
 def isCursorOnButtons(mouseCoord):
     if (backButton.isCursorOn(mouseCoord)):
@@ -17,9 +14,8 @@ def isCursorOnButtons(mouseCoord):
     else:
         backButton.changeTextColor(YELLOW)
 
-def settingsMenu():
-    
-    titleText = "Game Settings"
+def playerMenu(text):
+    titleText = text
     xPosTitle = SCREEN_WIDTH / 2
     yPosTitle = SCREEN_HEIGHT / 10
     font = pygame.font.Font(PRESS_START_2P, 70)
@@ -46,8 +42,9 @@ def settingsMenu():
                     if (backButton.isCursorOn(mouseCoord)):
                         running = False
             
-        
         SCREEN.blit(titleSurface, titleRect)
         backButton.drawButton()
         
         pygame.display.update()
+            
+

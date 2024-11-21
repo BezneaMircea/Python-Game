@@ -7,6 +7,9 @@ from utils.fonts.Fonts import PRESS_START_2P
 from utils.constants.MenuConstants import SCREEN
 from utils.RectButton import RectButton
 
+"""Button used for Settings, PlayerOne, PlayerTwo menus
+"""
+
 backText = 'Back'
 xPosBack = SCREEN_HEIGHT - SCREEN_HEIGHT / 10
 yPosBack = SCREEN_WIDTH / 2
