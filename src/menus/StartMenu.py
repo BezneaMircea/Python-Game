@@ -1,7 +1,8 @@
 import pygame
 
+from utils.pictures.menu_pictures import *
+
 from utils.constants.MenuConstants import *
-from utils.pictures.Pictures import *
 from utils.colors.Colors import *
 from utils.fonts.Fonts import PRESS_START_2P
 

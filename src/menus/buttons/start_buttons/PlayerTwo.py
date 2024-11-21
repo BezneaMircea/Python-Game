@@ -1,8 +1,9 @@
 import pygame
 
+from utils.pictures.buttons_pictures import *
+
 from utils.colors.Colors import YELLOW
 from utils.constants.MenuConstants import *
-from utils.pictures.Pictures import BUTTON_PNG
 from utils.fonts.Fonts import PRESS_START_2P
 from utils.constants.MenuConstants import SCREEN
 from utils.RectButton import RectButton

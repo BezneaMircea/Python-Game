@@ -3,7 +3,8 @@ import pygame
 from utils.constants.MenuConstants import *
 from utils.colors.Colors import *
 from utils.fonts.Fonts import *
-from utils.pictures.Pictures import *
+from utils.pictures.menu_pictures import *
+
 
 from buttons.general_buttons.back import *
 
