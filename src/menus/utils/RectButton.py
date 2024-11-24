@@ -37,8 +37,11 @@ class RectButton():
         """ Method used to drow the button and it s text
         """
         self.screen.blit(self.image, self.imageRect)
-        self.screen.blit(self.textSurface, self.textRect)
-
+        try:
+            self.screen.blit(self.textSurface, self.textRect)
+        except:
+            pass
+            
     def changeTextColor(self, color):
         self.color = color
         textSurface = self.font.render(self.text, True, color)
@@ -63,6 +66,10 @@ class RectButton():
         textRect = textSurface.get_rect(center=self.imageRect.center)
         self.textSurface = textSurface
         self.textRect = textRect
+        
+    def changeButtonImg(self, image):
+        self.image = image
+        self.imageRect = self.image.get_rect(center=(self.yPos, self.xPos))
 
         
     

@@ -56,7 +56,6 @@ def isCursorOnButtons(mouseCoord):
     else:
         playerTwoButton.changeTextColor(YELLOW)
 
-
 def drawAllButtons():
     quitButton.drawButton()
     settingsButton.drawButton()
@@ -88,12 +87,10 @@ while running:
 
                 if (settingsButton.isCursorOn(mouseCoord)):
                     settingsMenu()
- 
-            
+             
                 if (playButton.isCursorOn(mouseCoord)):
                     game()
 
-                
                 if (playerOneButton.isCursorOn(mouseCoord)):
                     playerMenu("Player One")
                 
