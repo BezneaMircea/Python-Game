@@ -1,17 +1,24 @@
 import pygame
 
+from utils.pictures.menu_pictures import *
+
 from utils.constants.MenuConstants import *
-from utils.pictures.Pictures import BACK_GROUND_JPEG
 from utils.colors.Colors import *
 from utils.fonts.Fonts import PRESS_START_2P
+from utils.music.Music import *
 
-from buttons.Quit import *
-from buttons.Setting import *
-from buttons.Play import *
-from buttons.PlayerOne import *
-from buttons.PlayerTwo import *
+from buttons.start_buttons.Quit import *
+from buttons.start_buttons.Setting import *
+from buttons.start_buttons.Play import *
+from buttons.start_buttons.PlayerOne import *
+from buttons.start_buttons.PlayerTwo import *
+
 
 from SettingMenu import settingsMenu
+from PlayerMenu import playerMenu
+from game.Game import game
+
+
 
 # Can be changed depending on what resolution we want
 # Upper Text
@@ -24,6 +31,11 @@ titleSurface = font.render(titleText, True, YELLOW)
 titleRect = titleSurface.get_rect()
 titleRect.center = (xPosTitle, yPosTitle)
 
+def playSong(songPath):
+    pygame.mixer.init()
+    pygame.mixer.music.load(songPath)
+    pygame.mixer.music.set_volume(0.5)
+    pygame.mixer.music.play()
 
 def isCursorOnButtons(mouseCoord):
     if (quitButton.isCursorOn(mouseCoord)):
@@ -51,7 +63,6 @@ def isCursorOnButtons(mouseCoord):
     else:
         playerTwoButton.changeTextColor(YELLOW)
 
-
 def drawAllButtons():
     quitButton.drawButton()
     settingsButton.drawButton()
@@ -60,6 +71,10 @@ def drawAllButtons():
     playerTwoButton.drawButton()
 
 running = True
+
+#There are some problems here
+#playSong(APO_SOLO_PATH_MP3)
+
 
 while running:
     
@@ -83,19 +98,16 @@ while running:
 
                 if (settingsButton.isCursorOn(mouseCoord)):
                     settingsMenu()
- 
-            
+             
                 if (playButton.isCursorOn(mouseCoord)):
-                    #TODO new game loop (actual game)
-                    pass
-                
+                    game()
+
                 if (playerOneButton.isCursorOn(mouseCoord)):
-                    #TODO new Menu for player ONE
-                    pass
+                    playerMenu("Player One")
                 
                 if (playerTwoButton.isCursorOn(mouseCoord)):
-                    #TODO new Menu for player TWO (similar to Player One)
-                    pass
+                    playerMenu("Player Two")
+
     
     
 
