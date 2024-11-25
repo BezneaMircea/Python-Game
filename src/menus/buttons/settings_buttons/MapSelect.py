@@ -12,6 +12,9 @@ SMALL_PICTURE_XPOS = SCREEN_HEIGHT - 3 * SCREEN_HEIGHT / 10 + 40
 SMALL_PICTURE_YPOS_LEFT = SCREEN_WIDTH / 2 - 250
 SMALL_PICTURE_YPOS_RIGHT = SCREEN_WIDTH / 2 + 250
 
+CENTER_PICTURE_XPOS = SCREEN_HEIGHT - 3 * SCREEN_HEIGHT / 10
+CENTER_PICTURE_YPOS = SCREEN_WIDTH / 2
+
 # Medium size picture for the selected picture in the gameSettings
 imageDefaultMedium =  pygame.transform.scale(DEFAULT_TABLE_PNG, IMAGE_SIZE)
 imageSeaMedium = pygame.transform.scale(SEA_TABLE_PNG, IMAGE_SIZE)
@@ -22,10 +25,8 @@ imageDefaultSmall = pygame.transform.scale(DEFAULT_TABLE_PNG, IMAGE_SIZE_SMALL)
 imageSeaSmall = pygame.transform.scale(SEA_TABLE_PNG, IMAGE_SIZE_SMALL)
 imageGraffitiSmall = pygame.transform.scale(GRAFFITI_TABLE_PNG, IMAGE_SIZE_SMALL)
 
-xPosMapSelect = SCREEN_HEIGHT - 3 * SCREEN_HEIGHT / 10
-yPosMapSelect = SCREEN_WIDTH / 2
 
-mapSelect = RectButton(SCREEN, xPosMapSelect, yPosMapSelect, imageDefaultMedium)
+mapSelect = RectButton(SCREEN, CENTER_PICTURE_XPOS, CENTER_PICTURE_YPOS, imageDefaultMedium)
 mapLeft = RectButton(SCREEN, SMALL_PICTURE_XPOS, SMALL_PICTURE_YPOS_LEFT, imageGraffitiSmall)
 mapRight = RectButton(SCREEN, SMALL_PICTURE_XPOS, SMALL_PICTURE_YPOS_RIGHT, imageSeaSmall)
 

@@ -1,11 +1,9 @@
-import pygame
-
 from utils.pictures.buttons_pictures import *
 from utils.constants.MenuConstants import *
 from utils.RectButton import RectButton
 from buttons.settings_buttons.MapSelect import (
     SMALL_PICTURE_YPOS_LEFT,
-    SMALL_PICTURE_XPOS,
+    SMALL_PICTURE_XPOS
 )
 
 

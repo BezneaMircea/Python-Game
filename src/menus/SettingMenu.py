@@ -11,6 +11,7 @@ from buttons.settings_buttons.MapSelect import *
 
 from buttons.settings_buttons.swipeLeftButton import swipeLeftButton
 from buttons.settings_buttons.swipeRightButton import swipeRightButton
+from buttons.settings_buttons.Borders import *
 
 from game.GameSettup import *
 
@@ -46,6 +47,9 @@ def drawAllButtons():
     mapRight.drawButton()
     swipeLeftButton.drawButton()
     swipeRightButton.drawButton()
+    borderCentre.drawButton()
+    borderLeft.drawButton()
+    borderRight.drawButton()
 
 def settingsMenu():
     
