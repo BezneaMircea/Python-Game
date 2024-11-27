@@ -1,5 +1,6 @@
 from utils.constants.MenuConstants import *
 from utils.pictures.puck_pictures import *
+import math
 
 # Puck radius
 PUCK_RADIUS = PUCK_DEFAULT_PNG.get_width() // 2
@@ -10,13 +11,13 @@ EPSILON = 2
 INITIAL_PUCK_SPEED = 10
 
 # Puck margins
-TABLE_SIDE_WALLS = 105
-TABLE_TOP_WALLS = 140
+TABLE_SIDE_WALLS = 90
+TABLE_TOP_WALLS = 125
 MARGINS = (TABLE_SIDE_WALLS, SCREEN_WIDTH - TABLE_SIDE_WALLS,
 		   TABLE_TOP_WALLS, SCREEN_HEIGHT - TABLE_TOP_WALLS)
 
 class Puck():
-	def __init__(self, screen, x, y, radius, image, speed, margins):
+	def __init__(self, screen, x, y, dx, dy, radius, image, speed, margins):
 		"""Constructor for the puck class
 			margins = (marginLeft, marginRight, marginUp, marginBottom)
 		"""
@@ -25,6 +26,8 @@ class Puck():
 		self.startingY = y
 		self.x = x
 		self.y = y
+		self.dx = dx
+		self.dy = dy
 		self.radius = radius
 		self.image = image
 		self.imageRect = self.image.get_rect(center=(x, y))
@@ -34,17 +37,28 @@ class Puck():
 	def resetPosition(self):
 		self.x = self.startingX
 		self.y = self.startingY
+		self.dx = 0
+		self.dy = 0
 
 	def collision(self, object):
 		"""Check if the puck collided with a paddle"""
 		dist = ((self.x - object.x) ** 2 + (self.y - object.y) ** 2) ** 0.5
 		if (dist <= self.radius + object.radius + EPSILON):
-			return True
-		return False
+			collision_angle = math.atan2(self.y - object.y, self.x - object.x)
+
+			self.dx = math.cos(collision_angle) * self.speed
+			self.dy = math.sin(collision_angle) * self.speed
 
 	def move(self):
-		self.x += self.speed
-		self.y += self.speed
+		"""Move the puck and handle wall collisions."""
+		self.x += self.dx
+		self.y += self.dy
+		
+		if self.x - self.radius <= self.margins[0] or self.x + self.radius >= self.margins[1]:
+			self.dx = -self.dx
+
+		if self.y - self.radius <= self.margins[2] or self.y + self.radius >= self.margins[3]:
+			self.dy = -self.dy
 		self.canMove()
 
 	def canMove(self):
@@ -55,6 +69,6 @@ class Puck():
 		self.imageRect = self.image.get_rect(center=(self.x, self.y))
 		self.screen.blit(self.image, self.imageRect)
 
-puck = Puck(SCREEN, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, PUCK_RADIUS, PUCK_DEFAULT_PNG, INITIAL_PUCK_SPEED, MARGINS)
+puck = Puck(SCREEN, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, 0, 0, PUCK_RADIUS, PUCK_DEFAULT_PNG, INITIAL_PUCK_SPEED, MARGINS)
 
 __all__ = ['puck']
