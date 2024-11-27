@@ -49,6 +49,10 @@ def game():
         if keys[playerTwo.controls[3]]:
             playerTwo.paddle.moveDown()
     
+        puck.collision(playerOne.paddle)
+        puck.collision(playerTwo.paddle)
+        puck.move()
+
         playerOne.paddle.draw()
         playerTwo.paddle.draw()
         puck.draw()

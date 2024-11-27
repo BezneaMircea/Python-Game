@@ -41,24 +41,20 @@ class Paddle():
 		self.y = self.startingY
 
 	def moveLeft(self):
-		if puck.collision(self) == False:
-			self.x -= self.speed
-			self.canMove()
+		self.x -= self.speed
+		self.canMove()
 
 	def moveRight(self):
-		if puck.collision(self) == False:
-			self.x += self.speed
-			self.canMove()
+		self.x += self.speed
+		self.canMove()
 
 	def moveUp(self):
-		if puck.collision(self) == False:
-			self.y -= self.speed
-			self.canMove()
+		self.y -= self.speed
+		self.canMove()
 
 	def moveDown(self):
-		if puck.collision(self) == False:
-			self.y += self.speed
-			self.canMove()
+		self.y += self.speed
+		self.canMove()
 
 	def canMove(self):
 		self.x = max(self.margins[0], min(self.x, self.margins[1]))
