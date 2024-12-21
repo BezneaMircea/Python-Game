@@ -1,12 +1,13 @@
 from utils.constants.MenuConstants import *
 from utils.pictures.paddle_pictures import *
 from game.Puck import *
+import math
 
 # Paddle radius
 PADDLE_RADIUS = PADDLE_DEFAULT_PNG.get_width() // 2
 
 # Initial paddle speed
-INITIAL_PADDLE_SPEED = 10
+INITIAL_PADDLE_SPEED = 7
 
 # Starting point for the paddles
 DISTANCE_FROM_CENTER = 500
@@ -41,20 +42,28 @@ class Paddle():
 		self.y = self.startingY
 
 	def moveLeft(self):
-		self.x -= self.speed
-		self.canMove()
+		# Verific daca paleta va intra in coliziune cu pucul la stanga
+		if not self.isCollidingWithPuck(-self.speed, 0):
+			self.x -= self.speed
+			self.canMove()
 
 	def moveRight(self):
-		self.x += self.speed
-		self.canMove()
+		# Verific daca paleta va intra in coliziune cu pucul la dreapta
+		if not self.isCollidingWithPuck(self.speed, 0):
+			self.x += self.speed
+			self.canMove()
 
 	def moveUp(self):
-		self.y -= self.speed
-		self.canMove()
+		# Verific daca paleta va intra in coliziune cu pucul sus
+		if not self.isCollidingWithPuck(0, -self.speed):
+			self.y -= self.speed
+			self.canMove()
 
 	def moveDown(self):
-		self.y += self.speed
-		self.canMove()
+		# Verific daca paleta va intra in coliziune cu pucul jos
+		if not self.isCollidingWithPuck(0, self.speed):
+			self.y += self.speed
+			self.canMove()
 
 	def canMove(self):
 		self.x = max(self.margins[0], min(self.x, self.margins[1]))
@@ -63,6 +72,16 @@ class Paddle():
 	def draw(self):
 		self.imageRect = self.image.get_rect(center=(self.x, self.y))
 		self.screen.blit(self.image, self.imageRect)
+
+	def isCollidingWithPuck(self, dx, dy):
+		new_x = self.x + dx
+		new_y = self.y + dy
+		
+		# Calculam distanta dintre paleta noua și puc
+		dist = math.sqrt((new_x - puck.x) ** 2 + (new_y - puck.y) ** 2)
+
+		# Daca distanta dintre paleta și puc este mai mica decat suma razelor lor, exista coliziune
+		return dist < self.radius + puck.radius
 
 paddleOne = Paddle(SCREEN, SCREEN_WIDTH / 2 - DISTANCE_FROM_CENTER, SCREEN_HEIGHT / 2, PADDLE_RADIUS,
 				   PADDLE_RED_PNG, INITIAL_PADDLE_SPEED, MARGINS_ONE)
