@@ -1,22 +1,21 @@
 from utils.pictures.table_pictures import *
+from game.Player import *
+from game.Puck import *
 
 CURRENT_MAP = DEFAULT_TABLE_PNG
 
 class GameSettup:
     def __init__(self, currentTableImg, playerOne,
-                 playerTwo, puckImg, time):
+                 playerTwo, puck, time):
         self.currentTableImg = currentTableImg
         self.playerOne = playerOne
         self.playerTwo = playerTwo
-        self.puckImg = puckImg
+        self.puck = puck
         self.time = time
 
     def changeTable(self, newTableImg):
         self.currentTableImg = newTableImg
         
-
-
-__all__ = ['GameSettup']
 
 
 # TODO:
@@ -27,14 +26,9 @@ __all__ = ['GameSettup']
 #       self.controls = (leftKey, rightKey, upKey, downKey)
 # Change de default values for players, puckImg, time
 
-#Random values so i can initialize the class
-playerOne = 1
-playerTwo = 2
-puckImg = 3
 time = 4
 
-#
 currentGameSettings = GameSettup(DEFAULT_TABLE_PNG, playerOne,
-                                 playerTwo, puckImg, time)
+                                 playerTwo, puck, time)
 
 __all__ = ['currentGameSettings']
