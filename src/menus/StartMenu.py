@@ -77,9 +77,9 @@ running = True
 
 
 while running:
-    
+
     SCREEN.blit(BACK_GROUND_JPEG, (0, 0))
-    SCREEN.blit(titleSurface, titleRect)
+    SCREEN.blit(titleSurface, titleRect)    
     
     for event in pygame.event.get():        
         

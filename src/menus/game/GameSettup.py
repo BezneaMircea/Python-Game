@@ -13,6 +13,8 @@ class GameSettup:
 
     def changeTable(self, newTableImg):
         self.currentTableImg = newTableImg
+        
+
 
 __all__ = ['GameSettup']
 

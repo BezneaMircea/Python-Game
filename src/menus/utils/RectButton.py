@@ -1,4 +1,3 @@
-import pygame
 
 """Class used to create a rectangular
    button and it s methods
