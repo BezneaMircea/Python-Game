@@ -43,23 +43,43 @@ class Puck():
 	def collision(self, object):
 		"""Check if the puck collided with a paddle"""
 		dist = ((self.x - object.x) ** 2 + (self.y - object.y) ** 2) ** 0.5
-		if (dist <= self.radius + object.radius + EPSILON):
+		if dist <= self.radius + object.radius + EPSILON:
 			collision_angle = math.atan2(self.y - object.y, self.x - object.x)
 
 			self.dx = math.cos(collision_angle) * self.speed
 			self.dy = math.sin(collision_angle) * self.speed
 
+		if abs(self.dx) < 1:
+			self.dx = -self.dx
+	
+		if abs(self.dy) < 1:
+			self.dy = -self.dy
+
 	def move(self):
-		"""Move the puck and handle wall collisions."""
 		self.x += self.dx
 		self.y += self.dy
-		
-		if self.x - self.radius <= self.margins[0] or self.x + self.radius >= self.margins[1]:
-			self.dx = -self.dx
 
+		# Coliziuni cu marginile din stanga și dreapta
+		if self.x - self.radius <= self.margins[0] or self.x + self.radius >= self.margins[1]:
+			self.dx = -self.dx  # Inversam directia pe axa X
+			# Impingem pucul putin departe de marginea mesei pentru a preveni statul
+			if self.x - self.radius <= self.margins[0]:
+				self.x = self.margins[0] + self.radius
+			elif self.x + self.radius >= self.margins[1]:
+				self.x = self.margins[1] - self.radius
+
+		# Coliziuni cu marginile de sus și jos
 		if self.y - self.radius <= self.margins[2] or self.y + self.radius >= self.margins[3]:
-			self.dy = -self.dy
+			self.dy = -self.dy  # Inversam directia pe axa Y
+			# Impingem pucul putin departe de marginea mesei pentru a preveni stagnarea
+			if self.y - self.radius <= self.margins[2]:
+				self.y = self.margins[2] + self.radius
+			elif self.y + self.radius >= self.margins[3]:
+				self.y = self.margins[3] - self.radius
+
+		# Asigura-te ca pucul nu depaseste limitele mesei
 		self.canMove()
+		
 
 	def canMove(self):
 		self.x = max(self.margins[0], min(self.x, self.margins[1]))

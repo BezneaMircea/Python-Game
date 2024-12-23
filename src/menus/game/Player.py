@@ -7,6 +7,9 @@ class Player:
         self.name = name
         self.paddle = paddle
         self.controls = controls
+    
+    def changePlayerPaddle(self, image):
+        self.paddle.changeImg(image)
         
 playerOne = Player('Player One', paddleOne, (pygame.K_a, pygame.K_d, pygame.K_w, pygame.K_s))
 playerTwo = Player('Player Two', paddleTwo, (pygame.K_LEFT, pygame.K_RIGHT, pygame.K_UP, pygame.K_DOWN))

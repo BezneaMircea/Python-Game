@@ -15,6 +15,16 @@ class GameSettup:
 
     def changeTable(self, newTableImg):
         self.currentTableImg = newTableImg
+    
+    def changePlayerPaddleImg(self, playerId, newImg):
+        if playerId == 1:
+            self.playerOne.changePlayerPaddle(newImg)
+            return    
+        if playerId == 2:
+            self.playerTwo.changePlayerPaddle(newImg)
+            return
+        IndexError
+            
         
 
 

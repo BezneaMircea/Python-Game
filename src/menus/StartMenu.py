@@ -103,10 +103,10 @@ while running:
                     game()
 
                 if (playerOneButton.isCursorOn(mouseCoord)):
-                    playerMenu("Player One")
+                    playerMenu("Player One", 1)
                 
                 if (playerTwoButton.isCursorOn(mouseCoord)):
-                    playerMenu("Player Two")
+                    playerMenu("Player Two", 2)
 
     
     

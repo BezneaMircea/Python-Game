@@ -4,9 +4,13 @@ from utils.constants.MenuConstants import *
 from utils.colors.Colors import *
 from utils.fonts.Fonts import *
 from utils.pictures.menu_pictures import *
-
+from utils.pictures.buttons_pictures import *
 
 from buttons.general_buttons.back import *
+from buttons.player_settings_buttons.PaddleSelect import *
+
+from buttons.settings_buttons.swipeLeftButton import swipeLeftButton
+from buttons.settings_buttons.swipeRightButton import swipeRightButton
 
 
 def isCursorOnButtons(mouseCoord):
@@ -15,7 +19,25 @@ def isCursorOnButtons(mouseCoord):
     else:
         backButton.changeTextColor(YELLOW)
 
-def playerMenu(text):
+    if (swipeLeftButton.isCursorOn(mouseCoord)):
+        swipeLeftButton.changeButtonImg(SWIPE_LEFT_BUTTON_BIG_PNG)
+    else:
+        swipeLeftButton.changeButtonImg(SWIPE_LEFT_BUTTON_PNG)
+    
+    if (swipeRightButton.isCursorOn(mouseCoord)):
+        swipeRightButton.changeButtonImg(SWIPE_RIGHT_BUTTON__BIG_PNG)
+    else:
+        swipeRightButton.changeButtonImg(SWIPE_RIGHT_BUTTON_PNG)
+
+def drawAllButtons(playerId):
+    backButton.drawButton()
+    playerPaddleSelection.draw(playerId)
+    swipeLeftButton.drawButton()
+    swipeRightButton.drawButton()
+    
+
+
+def playerMenu(text, playerId):
     titleText = text
     xPosTitle = SCREEN_WIDTH / 2
     yPosTitle = SCREEN_HEIGHT / 10
@@ -25,8 +47,13 @@ def playerMenu(text):
     titleRect.center = (xPosTitle, yPosTitle)
     
     running = True
+
+
     while running:
+
         SCREEN.blit(BACK_GROUND_JPEG, (0, 0))
+        SCREEN.blit(titleSurface, titleRect)
+
         for event in pygame.event.get():
             
             if event.type == pygame.QUIT:
@@ -42,9 +69,15 @@ def playerMenu(text):
                 if (isLeftButtonPressed):
                     if (backButton.isCursorOn(mouseCoord)):
                         running = False
+                
+                if (swipeLeftButton.isCursorOn(mouseCoord)):
+                    playerPaddleSelection.changeWithLeftPaddle(playerId)
+                
+                if (swipeRightButton.isCursorOn(mouseCoord)):
+                    playerPaddleSelection.changeWithRightPaddle(playerId)      
+                    
             
-        SCREEN.blit(titleSurface, titleRect)
-        backButton.drawButton()
+        drawAllButtons(playerId)
         
         pygame.display.update()
             
