@@ -16,7 +16,8 @@ from buttons.start_buttons.PlayerTwo import *
 
 from SettingMenu import settingsMenu
 from PlayerMenu import playerMenu
-from game.Game import game
+from game.GameSettup import currentGameSettings
+from game.Game import Game
 
 
 
@@ -100,7 +101,8 @@ while running:
                     settingsMenu()
              
                 if (playButton.isCursorOn(mouseCoord)):
-                    game()
+                    game = Game(currentGameSettings)
+                    game.start()
 
                 if (playerOneButton.isCursorOn(mouseCoord)):
                     playerMenu("Player One", 1)
