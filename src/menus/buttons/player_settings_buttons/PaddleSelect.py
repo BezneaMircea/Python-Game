@@ -1,10 +1,16 @@
 from utils.pictures.table_pictures import *
 from utils.constants.MenuConstants import *
 from utils.pictures.paddle_pictures import *
+from utils.pictures.paddle_pictures import CIRCLE_BORDER_PNG
 from utils.RectButton import RectButton
 from game.GameSettup import currentGameSettings
 
 import pygame
+import numpy as np
+
+
+
+
 
 IMAGE_SIZE = (200, 150)
 IMAGE_SIZE_SMALL = (150, 100)
@@ -15,6 +21,10 @@ SMALL_PICTURE_YPOS_RIGHT = SCREEN_WIDTH / 2 + 250
 
 CENTER_PICTURE_XPOS = SCREEN_HEIGHT - 3 * SCREEN_HEIGHT / 10
 CENTER_PICTURE_YPOS = SCREEN_WIDTH / 2
+
+BORDER_EXTRA_LENGTH = (2, 5)
+BORDER_SIZE_BIG = tuple(np.add(IMAGE_SIZE, BORDER_EXTRA_LENGTH))
+BORDER_SIZE_SMALL = tuple(np.add(IMAGE_SIZE_SMALL, BORDER_EXTRA_LENGTH))
 
 # Medium size picture for the selected picture in the gameSettings
 imageDefaultMedium =  pygame.transform.scale(DEFAULT_PADDLE_PNG, IMAGE_SIZE)
@@ -72,13 +82,17 @@ class PlayerMenu:
             
 
 class PaddleSelect:
-    def __init__(self, imageListLeft, imageListRight, curImg, paddleSelect, paddleLeft, paddleRight):
+    def __init__(self, imageListLeft, imageListRight, curImg, paddleSelect, paddleLeft, paddleRight,
+                 borderLeft, borderCentre, borderRight):
         self.imageListLeft = imageListLeft
         self.imageListRight = imageListRight
         self.curImg = curImg
         self.paddleSelect = paddleSelect
         self.paddleLeft = paddleLeft
         self.paddleRight = paddleRight
+        self.borderLeft = borderLeft
+        self.borderCentre = borderCentre
+        self.borderRight = borderRight
         
     def changeWithLeft(self, id):
         if not self.imageListLeft:
@@ -115,13 +129,28 @@ class PaddleSelect:
         self.paddleSelect.drawButton()
         self.paddleLeft.drawButton()
         self.paddleRight.drawButton()
+        self.borderRight.drawButton()
+        self.borderCentre.drawButton()
+        self.borderLeft.drawButton()
         
-        
+
+
+
+imageBorderMedium =  pygame.transform.scale(CIRCLE_BORDER_PNG, BORDER_SIZE_BIG)
+imageBorderSmall = pygame.transform.scale(CIRCLE_BORDER_PNG, BORDER_SIZE_SMALL)
+
+
+borderLeft = RectButton(SCREEN, SMALL_PICTURE_XPOS, SMALL_PICTURE_YPOS_LEFT, imageBorderSmall)
+borderCentre = RectButton(SCREEN, CENTER_PICTURE_XPOS, CENTER_PICTURE_YPOS, imageBorderMedium)
+borderRight = RectButton(SCREEN, SMALL_PICTURE_XPOS, SMALL_PICTURE_YPOS_RIGHT, imageBorderSmall)
+ 
         
 paddleSelectOne = PaddleSelect(imageListOneLeft, imageListOneRight, currentImageOne,
-                               paddleOne, paddleLeftOne, paddleRightOne)
+                               paddleOne, paddleLeftOne, paddleRightOne, borderLeft,
+                               borderCentre, borderRight)
 paddleSelectTwo = PaddleSelect(imageListTwoLeft, imageListTwoRight, currentImageTwo,
-                               paddleTwo, paddleLeftTwo, paddleRightTwo)
+                               paddleTwo, paddleLeftTwo, paddleRightTwo, borderLeft,
+                               borderCentre, borderRight)
 
 playerPaddleSelection = PlayerMenu(paddleSelectOne, paddleSelectTwo)
 
