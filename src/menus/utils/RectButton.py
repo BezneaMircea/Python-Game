@@ -65,7 +65,12 @@ class RectButton():
         textRect = textSurface.get_rect(center=self.imageRect.center)
         self.textSurface = textSurface
         self.textRect = textRect
-        
+
+    def changePosition(self, newXPos, newYPos):
+        self.xPos = newXPos
+        self.yPos = newYPos
+        self.imageRect = self.image.get_rect(center=(newYPos, newXPos))
+    
     def changeButtonImg(self, image):
         self.image = image
         self.imageRect = self.image.get_rect(center=(self.yPos, self.xPos))

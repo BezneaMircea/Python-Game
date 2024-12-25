@@ -10,8 +10,6 @@ class Game:
         self.puck = currentGameSettings.puck
         
     def beginningTimer(self):
-        clock = pygame.time.Clock()
-
         currentImageIndex = 0
         lastSwitchTime = pygame.time.get_ticks()
         

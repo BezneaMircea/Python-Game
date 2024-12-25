@@ -8,9 +8,10 @@ from utils.pictures.buttons_pictures import *
 
 from buttons.general_buttons.back import *
 from buttons.player_settings_buttons.PaddleSelect import *
+from buttons.player_settings_buttons.PlayerSettingsBorders import *
 
-from buttons.settings_buttons.swipeLeftButton import swipeLeftButton
-from buttons.settings_buttons.swipeRightButton import swipeRightButton
+from buttons.general_buttons.swipeLeftButton import swipeLeftButton
+from buttons.general_buttons.swipeRightButton import swipeRightButton
 
 
 def isCursorOnButtons(mouseCoord):
@@ -31,9 +32,11 @@ def isCursorOnButtons(mouseCoord):
 
 def drawAllButtons(playerId):
     backButton.drawButton()
-    playerPaddleSelection.draw(playerId)
     swipeLeftButton.drawButton()
     swipeRightButton.drawButton()
+    
+    playerPaddleSelection.draw(playerId)
+    playerSettingsBorders.draw()
     
 
 

@@ -26,17 +26,7 @@ class GameSettup:
         IndexError
             
         
-
-
-# TODO:
-# Create the player class and so on
-# eg: class player():
-#       self.name = name
-#       self.puck = puck
-#       self.controls = (leftKey, rightKey, upKey, downKey)
-# Change de default values for players, puckImg, time
-
-time = 4
+time = 150
 
 currentGameSettings = GameSettup(DEFAULT_TABLE_PNG, playerOne,
                                  playerTwo, puck, time)

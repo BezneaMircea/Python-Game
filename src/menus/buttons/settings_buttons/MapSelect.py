@@ -36,45 +36,53 @@ imageListLeft = [(imageGraffitiSmall, imageGraffitiMedium, GRAFFITI_TABLE_PNG)]
 imageListRight = [(imageSeaSmall, imageSeaMedium, SEA_TABLE_PNG)]
 
 currentImage = (imageDefaultSmall, imageDefaultMedium , DEFAULT_TABLE_PNG)
+class MapSelect:
+    def __init__(self, imageListLeft, imageListRight, curImg,
+                 mapSelect, mapLeft, mapRight):
+        self.imageListLeft = imageListLeft
+        self.imageListRight = imageListRight
+        self.curImg = curImg
+        self.mapSelect = mapSelect
+        self.mapLeft = mapLeft
+        self.mapRight = mapRight
+    
+    def changeWithTableOnLeft(self):
+        if not self.imageListLeft:
+            return
+        
+        newImage = self.imageListLeft.pop(0)
+        self.imageListRight.insert(0, self.curImg)
+        self.imageListLeft.append(self.imageListRight.pop(len(self.imageListRight) - 1))
+        self.curImg = newImage
+        
+        self.mapSelect.changeButtonImg(self.curImg[1])
+        self.mapLeft.changeButtonImg(self.imageListLeft[0][0])
+        self.mapRight.changeButtonImg(self.imageListRight[0][0])
+        
+        currentGameSettings.changeTable(self.curImg[2])
+        
+    def changeWithTableOnRight(self):
+        if not self.imageListRight:
+            return
 
-def changeWithTableOnLeft():
-    global imageListLeft
-    global imageListRight
-    global currentImage
-    
-    if not imageListLeft:
-        return
-    
-    newImage = imageListLeft.pop(0)
-    imageListRight.insert(0, currentImage)
-    imageListLeft.append(imageListRight.pop(len(imageListRight) - 1))
-    currentImage = newImage
-    
-    mapSelect.changeButtonImg(currentImage[1])
-    mapLeft.changeButtonImg(imageListLeft[0][0])
-    mapRight.changeButtonImg(imageListRight[0][0])
-    
-    currentGameSettings.changeTable(currentImage[2])
-     
-def changeWithTableOnRight():
-    global imageListLeft
-    global imageListRight
-    global currentImage
-    
-    if not imageListRight:
-        return
+        newImage = self.imageListRight.pop(0)
+        self.imageListLeft.insert(0, self.curImg)
+        self.imageListRight.append(self.imageListLeft.pop(len(self.imageListLeft) - 1))
+        self.curImg = newImage
 
-    newImage = imageListRight.pop(0)
-    imageListLeft.insert(0, currentImage)
-    imageListRight.append(imageListLeft.pop(len(imageListLeft) - 1))
-    currentImage = newImage
+        self.mapSelect.changeButtonImg(self.curImg[1])
+        self.mapLeft.changeButtonImg(self.imageListLeft[0][0])
+        self.mapRight.changeButtonImg(self.imageListRight[0][0])
+        
+        currentGameSettings.changeTable(self.curImg[2])
+        
+    def draw(self):
+        self.mapSelect.drawButton()
+        self.mapLeft.drawButton()
+        self.mapRight.drawButton()
 
-    mapSelect.changeButtonImg(currentImage[1])
-    mapLeft.changeButtonImg(imageListLeft[0][0])
-    mapRight.changeButtonImg(imageListRight[0][0])
-    
-    currentGameSettings.changeTable(currentImage[2])
+mapSelection = MapSelect(imageListLeft, imageListRight, currentImage,
+                         mapSelect, mapLeft, mapRight)
 
 
-__all__ = ['mapSelect', 'mapLeft', 'mapRight',
-           'changeWithTableOnRight', 'changeWithTableOnLeft']
+__all__ = ['mapSelection']

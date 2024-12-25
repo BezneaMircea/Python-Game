@@ -9,9 +9,10 @@ from utils.pictures.buttons_pictures import *
 from buttons.general_buttons.back import *
 from buttons.settings_buttons.MapSelect import *
 
-from buttons.settings_buttons.swipeLeftButton import swipeLeftButton
-from buttons.settings_buttons.swipeRightButton import swipeRightButton
+from buttons.general_buttons.swipeLeftButton import swipeLeftButton
+from buttons.general_buttons.swipeRightButton import swipeRightButton
 from buttons.settings_buttons.Borders import *
+from buttons.settings_buttons.TimeControl import timeControl
 
 from game.GameSettup import *
 
@@ -42,19 +43,17 @@ def isCursorOnButtons(mouseCoord):
 
 def drawAllButtons():
     backButton.drawButton()
-    mapSelect.drawButton()
-    mapLeft.drawButton()
-    mapRight.drawButton()
     swipeLeftButton.drawButton()
     swipeRightButton.drawButton()
-    borderCentre.drawButton()
-    borderLeft.drawButton()
-    borderRight.drawButton()
-
+    mapSelection.draw()
+    mapSelectionBorders.draw()
+    timeControl.draw()
+    
 def settingsMenu():
     
     running = True
     
+    isPressed = False
     while running:
         
         SCREEN.blit(BACK_GROUND_JPEG, (0, 0))
@@ -77,10 +76,23 @@ def settingsMenu():
                         running = False
                         
                     if (swipeLeftButton.isCursorOn(mouseCoord)):
-                        changeWithTableOnLeft()
+                        mapSelection.changeWithTableOnLeft()
 
                     if (swipeRightButton.isCursorOn(mouseCoord)):
-                        changeWithTableOnRight()
+                        mapSelection.changeWithTableOnRight()
+        
+        mouseCoord = pygame.mouse.get_pos()
+        pressedMouse = pygame.mouse.get_pressed()
+        
+        
+        if (timeControl.barButton.isCursorOn(mouseCoord) and pressedMouse[0]):
+            isPressed = True
+        
+        if not pressedMouse[0]:
+            isPressed = False
+
+        if (isPressed):
+            timeControl.move(mouseCoord)
         
         drawAllButtons()
         
