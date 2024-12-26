@@ -2,5 +2,6 @@ RED = (255, 0, 0)
 YELLOW = (223, 228, 139)
 CYAN = (109, 238, 240)
 LIME_GREEN = (146, 242, 67)
+PURPLE = (113, 30, 130)
 
-__all__ = ['RED', 'YELLOW', 'CYAN', 'LIME_GREEN']
+__all__ = ['RED', 'YELLOW', 'CYAN', 'LIME_GREEN', 'PURPLE']

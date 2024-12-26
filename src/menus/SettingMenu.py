@@ -12,7 +12,8 @@ from buttons.settings_buttons.MapSelect import *
 from buttons.general_buttons.swipeLeftButton import swipeLeftButton
 from buttons.general_buttons.swipeRightButton import swipeRightButton
 from buttons.settings_buttons.Borders import *
-from buttons.settings_buttons.TimeControl import timeControl
+from buttons.settings_buttons.control_bars.TimeControl import timeControl
+from buttons.settings_buttons.control_bars.VolumeControl import volumeControl
 
 from game.GameSettup import *
 
@@ -48,12 +49,14 @@ def drawAllButtons():
     mapSelection.draw()
     mapSelectionBorders.draw()
     timeControl.draw()
+    volumeControl.draw()
     
 def settingsMenu():
     
     running = True
     
-    isPressed = False
+    isPressedTime = False
+    isPressedVolume = False
     while running:
         
         SCREEN.blit(BACK_GROUND_JPEG, (0, 0))
@@ -86,13 +89,21 @@ def settingsMenu():
         
         
         if (timeControl.barButton.isCursorOn(mouseCoord) and pressedMouse[0]):
-            isPressed = True
+            isPressedTime = True
+        
+        if (volumeControl.barButton.isCursorOn(mouseCoord) and pressedMouse[0]):
+            isPressedVolume = True
+            
         
         if not pressedMouse[0]:
-            isPressed = False
+            isPressedTime = False
+            isPressedVolume = False
 
-        if (isPressed):
+        if (isPressedTime):
             timeControl.move(mouseCoord)
+        
+        if (isPressedVolume):
+            volumeControl.move(mouseCoord)
         
         drawAllButtons()
         
