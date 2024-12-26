@@ -5,7 +5,6 @@ from utils.colors.Colors import *
 from buttons.settings_buttons.control_bars.ControlBar import ControlBar
 from utils.RectButton import RectButton
 from utils.TextButton import TextButton
-import math
 
 X_POS = SCREEN_HEIGHT / 4
 Y_POS = SCREEN_WIDTH / 2

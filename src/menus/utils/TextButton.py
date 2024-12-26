@@ -18,6 +18,11 @@ class TextButton():
         self.textSurface = self.loadedFont.render(newText, True, self.fontColour)
         self.textRect = self.textSurface.get_rect(center=(self.yPos, self.xPos))
     
+    def changeColour(self, newColour):
+        self.fontColour = newColour
+        self.textSurface = self.loadedFont.render(self.text, True, self.fontColour)
+        self.textRect = self.textSurface.get_rect(center=(self.yPos, self.xPos))
+    
     def displayText(self):
         self.screen.blit(self.textSurface, self.textRect)
             

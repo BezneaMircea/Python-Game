@@ -1,6 +1,13 @@
 import pygame
 from utils.constants.MenuConstants import *
 from utils.pictures.countdown_pictures import COUNTDOWN
+from utils.fonts.Fonts import PRESS_START_2P
+from utils.colors.Colors import YELLOW, RED
+from utils.TextButton import TextButton
+import math
+
+
+SECONDS_FOR_DEATHMATCH = 30
 
 class Game:
     def __init__(self, currentGameSettings):
@@ -8,7 +15,19 @@ class Game:
         self.playerOne = currentGameSettings.playerOne
         self.playerTwo = currentGameSettings.playerTwo
         self.puck = currentGameSettings.puck
-        
+        self.time = currentGameSettings.time # time is in seconds
+        self.timePlayed = 0
+        self.timeText = TextButton(SCREEN, 30, SCREEN_WIDTH / 2, self.returnTimeText(self.time), PRESS_START_2P, 30, YELLOW)
+    
+    def returnTimeText(self, time : int) -> str:
+        minutes = math.floor(time / 60)
+        seconds = time % 60
+        if seconds < 10:
+            return f"0{minutes}:0{seconds}"
+        else:
+            return f"0{minutes}:{seconds}"
+    
+    
     def beginningTimer(self):
         currentImageIndex = 0
         lastSwitchTime = pygame.time.get_ticks()
@@ -16,6 +35,7 @@ class Game:
         running = True
         while running:
             SCREEN.blit(self.tableImg, (0, 0))
+            self.timeText.displayText()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -44,8 +64,17 @@ class Game:
         # FOR GHENI: Just comment this function if it annoys you:
         self.beginningTimer()
         #
+        startTime = round(pygame.time.get_ticks() / 1000)
         running = True
-        while running:
+        while running and self.timePlayed < self.time :
+            self.timePlayed = round(pygame.time.get_ticks() / 1000) - startTime
+            self.timeText.changeText(self.returnTimeText(self.time - self.timePlayed))
+            
+            if (self.time - self.timePlayed <= SECONDS_FOR_DEATHMATCH):
+                self.timeText.changeColour(RED)
+                
+            
+            
             SCREEN.blit(self.tableImg, (0, 0))
             for event in pygame.event.get():
             
@@ -87,7 +116,7 @@ class Game:
             self.puck.collision(self.playerOne.paddle)
             self.puck.collision(self.playerTwo.paddle)
             
-
+            self.timeText.displayText()
             self.playerOne.paddle.draw()
             self.playerTwo.paddle.draw()
             self.puck.draw()
