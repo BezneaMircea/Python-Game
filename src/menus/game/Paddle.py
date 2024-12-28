@@ -77,10 +77,10 @@ class Paddle():
         new_x = self.x + dx
         new_y = self.y + dy
         
-        # Calculam distanta dintre paleta noua și puc
+        # Calculam distanta dintre paleta noua si puc
         dist = math.sqrt((new_x - puck.x) ** 2 + (new_y - puck.y) ** 2)
 
-        # Daca distanta dintre paleta și puc este mai mica decat suma razelor lor, exista coliziune
+        # Daca distanta dintre paleta si puc este mai mica decat suma razelor lor, exista coliziune
         return dist < self.radius + puck.radius
 
     def changeImg(self, newImg):

@@ -16,7 +16,7 @@ from buttons.start_buttons.PlayerTwo import *
 
 from SettingMenu import settingsMenu
 from PlayerMenu import playerMenu
-from game.GameSettup import currentGameSettings
+from game.GameSetup import currentGameSettings
 from game.Game import Game
 
 

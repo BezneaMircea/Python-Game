@@ -15,7 +15,7 @@ from buttons.settings_buttons.Borders import *
 from buttons.settings_buttons.control_bars.TimeControl import timeControl
 from buttons.settings_buttons.control_bars.VolumeControl import volumeControl
 
-from game.GameSettup import *
+from game.GameSetup import *
 
 titleText = "Game Settings"
 xPosTitle = SCREEN_WIDTH / 2

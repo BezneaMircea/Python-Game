@@ -2,7 +2,7 @@ from utils.pictures.table_pictures import *
 from utils.constants.MenuConstants import *
 from utils.pictures.paddle_pictures import *
 from utils.RectButton import RectButton
-from game.GameSettup import currentGameSettings
+from game.GameSetup import currentGameSettings
 
 import pygame
 
