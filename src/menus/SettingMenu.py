@@ -52,9 +52,9 @@ def drawAllButtons():
     volumeControl.draw()
     
 def settingsMenu():
-    
+
     running = True
-    
+
     isPressedTime = False
     isPressedVolume = False
     while running:

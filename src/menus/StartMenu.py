@@ -74,7 +74,7 @@ def drawAllButtons():
 running = True
 
 #There are some problems here
-#playSong(APO_SOLO_PATH_MP3)
+playSong(APO_SOLO_PATH_MP3)
 
 
 while running:
