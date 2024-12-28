@@ -4,7 +4,7 @@ from game.Puck import *
 
 CURRENT_MAP = DEFAULT_TABLE_PNG
 
-class GameSettup:
+class GameSetup:
     def __init__(self, currentTableImg, playerOne,
                  playerTwo, puck, time):
         self.currentTableImg = currentTableImg
@@ -24,11 +24,11 @@ class GameSettup:
             self.playerTwo.changePlayerPaddle(newImg)
             return
         IndexError
-            
-        
+
+
 time = 150
 
-currentGameSettings = GameSettup(DEFAULT_TABLE_PNG, playerOne,
+currentGameSettings = GameSetup(DEFAULT_TABLE_PNG, playerOne,
                                  playerTwo, puck, time)
 
 __all__ = ['currentGameSettings']

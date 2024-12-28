@@ -13,7 +13,7 @@ INITIAL_PUCK_SPEED = 10
 # Puck margins
 TABLE_SIDE_WALLS = 90
 TABLE_TOP_WALLS = 125
-MARGINS = (TABLE_SIDE_WALLS, SCREEN_WIDTH - TABLE_SIDE_WALLS,
+MARGINS = (TABLE_SIDE_WALLS, SCREEN_WIDTH - TABLE_SIDE_WALLS,	
 		   TABLE_TOP_WALLS, SCREEN_HEIGHT - TABLE_TOP_WALLS)
 
 class Puck():
@@ -71,13 +71,13 @@ class Puck():
 		# Coliziuni cu marginile de sus și jos
 		if self.y - self.radius <= self.margins[2] or self.y + self.radius >= self.margins[3]:
 			self.dy = -self.dy  # Inversam directia pe axa Y
-			# Impingem pucul putin departe de marginea mesei pentru a preveni stagnarea
+			# Impingem pucul putin departe de marginea mesei pentru a preveni statul
 			if self.y - self.radius <= self.margins[2]:
 				self.y = self.margins[2] + self.radius
 			elif self.y + self.radius >= self.margins[3]:
 				self.y = self.margins[3] - self.radius
 
-		# Asigura-te ca pucul nu depaseste limitele mesei
+		# Ne asiguram ca pucul nu depaseste limitele mesei
 		self.canMove()
 		
 
