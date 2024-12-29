@@ -88,10 +88,12 @@ def settingsMenu():
         pressedMouse = pygame.mouse.get_pressed()
         
         
-        if (timeControl.barButton.isCursorOn(mouseCoord) and pressedMouse[0]):
+        if (timeControl.barButton.isCursorOn(mouseCoord) and pressedMouse[0]
+            and not isPressedVolume):
             isPressedTime = True
         
-        if (volumeControl.barButton.isCursorOn(mouseCoord) and pressedMouse[0]):
+        if (volumeControl.barButton.isCursorOn(mouseCoord) and pressedMouse[0]
+            and not isPressedTime):
             isPressedVolume = True
             
         

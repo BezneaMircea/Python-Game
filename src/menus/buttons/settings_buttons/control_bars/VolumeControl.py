@@ -32,7 +32,7 @@ class VolumeControlBar(ControlBar):
         if self.currentValue == self.maxValue:
             self.valueButton.changeText("MAX")
             return
-        
+
         if (self.currentValue == self.minValue):
             self.valueButton.changeText("MIN")
             return
@@ -41,7 +41,7 @@ class VolumeControlBar(ControlBar):
             self.valueButton.changeText(f"{self.currentValue}0")
         else:
             self.valueButton.changeText(f"{self.currentValue}")
-        
+
     def computeValue(self):
         self.currentValue = round(self.originalValue + self.unit * (self.barButton.yPos - self.originalPos), 2)
         pygame.mixer.music.set_volume(self.currentValue)
