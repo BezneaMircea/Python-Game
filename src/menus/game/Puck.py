@@ -29,6 +29,18 @@ class Puck():
 		self.dx = 0
 		self.dy = 0
 
+	def resetPlayerOnePuckPosition(self):
+		self.x = POSITION_PUCK_PLAYER_ONE[0]
+		self.y = POSITION_PUCK_PLAYER_ONE[1]
+		self.dx = 0
+		self.dy = 0
+
+	def resetPlayerTwoPuckPosition(self):
+		self.x = POSITION_PUCK_PLAYER_TWO[0]
+		self.y = POSITION_PUCK_PLAYER_TWO[1]
+		self.dx = 0
+		self.dy = 0
+
 	def collision(self, object):
 		"""Check if the puck collided with a paddle"""
 		dist = ((self.x - object.x) ** 2 + (self.y - object.y) ** 2) ** 0.5
@@ -67,9 +79,8 @@ class Puck():
 		self.x = max(self.margins[0], min(self.x, self.margins[1]))
 		self.y = max(self.margins[2], min(self.y, self.margins[3]))
 
-	def resetGameState(self, paddlePlayerOne, paddlePlayerTwo):
+	def resetPaddles(self, paddlePlayerOne, paddlePlayerTwo):
 		"""Reset puck and paddle positions after a goal"""
-		self.resetPosition()
 		paddlePlayerOne.resetPosition()
 		paddlePlayerTwo.resetPosition()
 
@@ -78,12 +89,14 @@ class Puck():
 		if GOAL_TOP <= self.y <= GOAL_BOTTOM:
 			if self.x - self.radius <= self.margins[0]:
 				playerTwo.increaseScore()
-				self.resetGameState(playerOne.paddle, playerTwo.paddle)
+				self.resetPaddles(playerOne.paddle, playerTwo.paddle)
+				self.resetPlayerOnePuckPosition()
 				# Goal for Player 2
 				# Increment Player 2's score
 			elif self.x + self.radius >= self.margins[1]:
 				playerOne.increaseScore()
-				self.resetGameState(playerOne.paddle, playerTwo.paddle)
+				self.resetPaddles(playerOne.paddle, playerTwo.paddle)
+				self.resetPlayerTwoPuckPosition()
 				# Goal for Player 1
 				# Increment Player 1's score
 

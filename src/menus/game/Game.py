@@ -61,15 +61,21 @@ class Game:
                 pygame.time.wait(1000)
                 running = False
 
+    def resetScore(self):
+        self.playerOne.score = 0
+        self.playerTwo.score = 0
+        self.updateScore()
+    
     def updateScore(self):
         self.scoreText.changeText(f"{self.playerOne.score} - {self.playerTwo.score}")
         self.scoreText.displayText()
-                
-            
+
+
     def start(self):
         # FOR GHENI: Just comment this function if it annoys you:
+        self.resetScore()
         self.beginningTimer()
-        
+
         startTime = round(pygame.time.get_ticks() / 1000)
         running = True
         while running and self.timePlayed < self.time :
@@ -81,7 +87,7 @@ class Game:
             
             SCREEN.blit(self.tableImg, (0, 0))
             for event in pygame.event.get():
-            
+
                 if event.type == pygame.QUIT:
                     running = False
                     self.playerOne.paddle.resetPosition()
