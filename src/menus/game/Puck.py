@@ -7,15 +7,6 @@ PUCK_RADIUS = PUCK_DEFAULT_PNG.get_width() // 2
 
 EPSILON = 2
 
-# Initial puck speed
-INITIAL_PUCK_SPEED = 10
-
-# Puck margins
-TABLE_SIDE_WALLS = 90
-TABLE_TOP_WALLS = 125
-MARGINS = (TABLE_SIDE_WALLS, SCREEN_WIDTH - TABLE_SIDE_WALLS,	
-		   TABLE_TOP_WALLS, SCREEN_HEIGHT - TABLE_TOP_WALLS)
-
 class Puck():
 	def __init__(self, screen, x, y, dx, dy, radius, image, speed, margins):
 		"""Constructor for the puck class
@@ -59,31 +50,48 @@ class Puck():
 		self.x += self.dx
 		self.y += self.dy
 
-		# Coliziuni cu marginile din stanga și dreapta
+		# Colisions with left and right margins
 		if self.x - self.radius <= self.margins[0] or self.x + self.radius >= self.margins[1]:
-			self.dx = -self.dx  # Inversam directia pe axa X
-			# Impingem pucul putin departe de marginea mesei pentru a preveni statul
+			self.dx = -self.dx  # Switch direction on the OX axis
+			# Push the puck a little further from the table's edge to prevent it from standing still
 			if self.x - self.radius <= self.margins[0]:
 				self.x = self.margins[0] + self.radius
 			elif self.x + self.radius >= self.margins[1]:
 				self.x = self.margins[1] - self.radius
 
-		# Coliziuni cu marginile de sus și jos
+		# Colisions with top and bottom margins
 		if self.y - self.radius <= self.margins[2] or self.y + self.radius >= self.margins[3]:
-			self.dy = -self.dy  # Inversam directia pe axa Y
-			# Impingem pucul putin departe de marginea mesei pentru a preveni statul
+			self.dy = -self.dy  # Switch direction on the OY axis
+			# Push the puck a little further from the table's edge to prevent it from standing still
 			if self.y - self.radius <= self.margins[2]:
 				self.y = self.margins[2] + self.radius
 			elif self.y + self.radius >= self.margins[3]:
 				self.y = self.margins[3] - self.radius
 
-		# Ne asiguram ca pucul nu depaseste limitele mesei
+		# We make sure the puck doesn't exceed the table's limits
 		self.canMove()
 		
-
 	def canMove(self):
 		self.x = max(self.margins[0], min(self.x, self.margins[1]))
 		self.y = max(self.margins[2], min(self.y, self.margins[3]))
+
+	def resetGameState(self, paddlePlayerOne, paddlePlayerTwo):
+		"""Reset puck and paddle positions after a goal"""
+		self.resetPosition()
+		paddlePlayerOne.resetPosition()
+		paddlePlayerTwo.resetPosition()
+
+	def goal(self, paddlePlayerOne, paddlePlayerTwo):
+		"""Check if the puck enters a goal and handle the state changes."""
+		if GOAL_TOP <= self.y <= GOAL_BOTTOM:
+			if self.x - self.radius <= self.margins[0]:
+				self.resetGameState(paddlePlayerOne, paddlePlayerTwo)
+				# Goal for Player 2
+				# Increment Player 2's score
+			elif self.x + self.radius >= self.margins[1]:
+				self.resetGameState(paddlePlayerOne, paddlePlayerTwo)
+				# Goal for Player 1
+				# Increment Player 1's score
 
 	def draw(self):
 		self.imageRect = self.image.get_rect(center=(self.x, self.y))

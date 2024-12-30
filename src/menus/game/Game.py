@@ -112,10 +112,15 @@ class Game:
             if keys[self.playerTwo.controls[3]]:
                 self.playerTwo.paddle.moveDown()
             
+            
+            # Move the puck and check for collisions
             self.puck.move()
             self.puck.collision(self.playerOne.paddle)
             self.puck.collision(self.playerTwo.paddle)
-            
+
+            # Verify if the puck is in the gate area and it's a goal
+            self.puck.goal(self.playerOne.paddle, self.playerTwo.paddle)
+
             self.timeText.displayText()
             self.playerOne.paddle.draw()
             self.playerTwo.paddle.draw()

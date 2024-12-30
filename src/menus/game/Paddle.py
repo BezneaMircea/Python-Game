@@ -6,21 +6,6 @@ import math
 # Paddle radius
 PADDLE_RADIUS = BLUE_PADDLE_PNG.get_width() // 2
 
-# Initial paddle speed
-INITIAL_PADDLE_SPEED = 7
-
-# Starting point for the paddles
-DISTANCE_FROM_CENTER = 500
-
-# Paddle margins
-TABLE_SIDE_WALLS = 105
-TABLE_TOP_WALLS = 140
-PADDLE_CENTER_MARGIN = 57
-MARGINS_ONE = (TABLE_SIDE_WALLS, SCREEN_WIDTH / 2 - PADDLE_CENTER_MARGIN,
-               TABLE_TOP_WALLS, SCREEN_HEIGHT - TABLE_TOP_WALLS)
-MARGINS_TWO = (SCREEN_WIDTH / 2 + PADDLE_CENTER_MARGIN, SCREEN_WIDTH - TABLE_SIDE_WALLS,
-               TABLE_TOP_WALLS, SCREEN_HEIGHT - TABLE_TOP_WALLS)
-
 class Paddle():
     def __init__(self, screen, x, y, radius, image, speed, margins):
         """Constructor for the paddle class
@@ -42,25 +27,25 @@ class Paddle():
         self.y = self.startingY
 
     def moveLeft(self):
-        # Verific daca paleta va intra in coliziune cu pucul la stanga
+        # Verify if the paddle will collide with the puck on the left
         if not self.isCollidingWithPuck(-self.speed, 0):
             self.x -= self.speed
             self.canMove()
 
     def moveRight(self):
-        # Verific daca paleta va intra in coliziune cu pucul la dreapta
+        # Verify if the paddle will collide with the puck on the right
         if not self.isCollidingWithPuck(self.speed, 0):
             self.x += self.speed
             self.canMove()
 
     def moveUp(self):
-        # Verific daca paleta va intra in coliziune cu pucul sus
+        # Verify if the paddle will collide with the puck on the top
         if not self.isCollidingWithPuck(0, -self.speed):
             self.y -= self.speed
             self.canMove()
 
     def moveDown(self):
-        # Verific daca paleta va intra in coliziune cu pucul jos
+        # Verify if the paddle will collide with the puck on the bottom
         if not self.isCollidingWithPuck(0, self.speed):
             self.y += self.speed
             self.canMove()
@@ -77,10 +62,11 @@ class Paddle():
         new_x = self.x + dx
         new_y = self.y + dy
         
-        # Calculam distanta dintre paleta noua si puc
+        # Calculate the distance between the new paddle and the puck
         dist = math.sqrt((new_x - puck.x) ** 2 + (new_y - puck.y) ** 2)
 
-        # Daca distanta dintre paleta si puc este mai mica decat suma razelor lor, exista coliziune
+        # If the distance between the paddle and the puck is smaller than the sum of their radius,
+        # there is a collision
         return dist < self.radius + puck.radius
 
     def changeImg(self, newImg):
