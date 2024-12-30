@@ -7,6 +7,7 @@ from utils.pictures.menu_pictures import *
 from utils.pictures.buttons_pictures import *
 
 from buttons.general_buttons.back import *
+from buttons.player_settings_buttons.NameBox import *
 from buttons.player_settings_buttons.PaddleSelect import *
 from buttons.player_settings_buttons.PlayerSettingsBorders import *
 
@@ -37,8 +38,8 @@ def drawAllButtons(playerId):
     
     playerPaddleSelection.draw(playerId)
     playerSettingsBorders.draw()
+    nameBoxes.draw(playerId)
     
-
 
 def playerMenu(text, playerId):
     titleText = text
@@ -48,7 +49,7 @@ def playerMenu(text, playerId):
     titleSurface = font.render(titleText, True, YELLOW)
     titleRect = titleSurface.get_rect()
     titleRect.center = (xPosTitle, yPosTitle)
-    
+
     running = True
 
 
@@ -77,8 +78,10 @@ def playerMenu(text, playerId):
                     playerPaddleSelection.changeWithLeftPaddle(playerId)
                 
                 if (swipeRightButton.isCursorOn(mouseCoord)):
-                    playerPaddleSelection.changeWithRightPaddle(playerId)      
-                    
+                    playerPaddleSelection.changeWithRightPaddle(playerId)
+
+            nameBoxes.write(event, playerId)
+            
             
         drawAllButtons(playerId)
         

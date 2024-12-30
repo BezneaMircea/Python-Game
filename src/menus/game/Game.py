@@ -19,6 +19,8 @@ class Game:
         self.timePlayed = 0
         self.timeText = TextButton(SCREEN, 30, SCREEN_WIDTH / 2, self.returnTimeText(self.time), PRESS_START_2P, 30, YELLOW)
         self.scoreText = TextButton(SCREEN, 690, SCREEN_WIDTH / 2,  f"{self.playerOne.score} - {self.playerTwo.score}", PRESS_START_2P, 30, YELLOW)
+        self.playerOneName = TextButton(SCREEN, 30, 300, self.playerOne.name, PRESS_START_2P, 30, YELLOW)
+        self.playerTwoName = TextButton(SCREEN, 30, 1000, self.playerTwo.name, PRESS_START_2P, 30, YELLOW)
 
     def returnTimeText(self, time : int) -> str:
         minutes = math.floor(time / 60)
@@ -38,6 +40,8 @@ class Game:
             SCREEN.blit(self.tableImg, (0, 0))
             self.timeText.displayText()
             self.scoreText.displayText()
+            self.playerOneName.displayText()
+            self.playerTwoName.displayText()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -133,6 +137,8 @@ class Game:
             self.updateScore()
 
             self.timeText.displayText()
+            self.playerOneName.displayText()
+            self.playerTwoName.displayText()
             self.playerOne.paddle.draw()
             self.playerTwo.paddle.draw()
             self.puck.draw()
