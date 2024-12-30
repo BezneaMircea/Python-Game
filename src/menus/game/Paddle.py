@@ -62,12 +62,12 @@ class Paddle():
         new_x = self.x + dx
         new_y = self.y + dy
         
-        # Calculate the distance between the new paddle and the puck
+        # Calculate the distance between the paddle and the puck
         dist = math.sqrt((new_x - puck.x) ** 2 + (new_y - puck.y) ** 2)
 
         # If the distance between the paddle and the puck is smaller than the sum of their radius,
         # there is a collision
-        return dist < self.radius + puck.radius
+        return dist < self.radius + puck.radius - EPSILON
 
     def changeImg(self, newImg):
         self.image = newImg

@@ -18,7 +18,10 @@ class Game:
         self.time = currentGameSettings.time # time is in seconds
         self.timePlayed = 0
         self.timeText = TextButton(SCREEN, 30, SCREEN_WIDTH / 2, self.returnTimeText(self.time), PRESS_START_2P, 30, YELLOW)
-    
+        self.scoreText = TextButton(SCREEN, 690, SCREEN_WIDTH / 2,  f"{self.playerOne.score} - {self.playerTwo.score}", PRESS_START_2P, 30, YELLOW)
+        self.playerOneName = TextButton(SCREEN, 30, 300, self.playerOne.name, PRESS_START_2P, 30, YELLOW)
+        self.playerTwoName = TextButton(SCREEN, 30, 1000, self.playerTwo.name, PRESS_START_2P, 30, YELLOW)
+
     def returnTimeText(self, time : int) -> str:
         minutes = math.floor(time / 60)
         seconds = time % 60
@@ -36,6 +39,9 @@ class Game:
         while running:
             SCREEN.blit(self.tableImg, (0, 0))
             self.timeText.displayText()
+            self.scoreText.displayText()
+            self.playerOneName.displayText()
+            self.playerTwoName.displayText()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -58,12 +64,22 @@ class Game:
             if currentImageIndex == len(COUNTDOWN) - 1:
                 pygame.time.wait(1000)
                 running = False
-                
-            
+
+    def resetScore(self):
+        self.playerOne.score = 0
+        self.playerTwo.score = 0
+        self.updateScore()
+    
+    def updateScore(self):
+        self.scoreText.changeText(f"{self.playerOne.score} - {self.playerTwo.score}")
+        self.scoreText.displayText()
+
+
     def start(self):
         # FOR GHENI: Just comment this function if it annoys you:
+        self.resetScore()
         self.beginningTimer()
-        #
+
         startTime = round(pygame.time.get_ticks() / 1000)
         running = True
         while running and self.timePlayed < self.time :
@@ -71,13 +87,11 @@ class Game:
             self.timeText.changeText(self.returnTimeText(self.time - self.timePlayed))
             
             if (self.time - self.timePlayed <= SECONDS_FOR_DEATHMATCH):
-                self.timeText.changeColour(RED)
-                
-            
+                self.timeText.changeColour(RED)    
             
             SCREEN.blit(self.tableImg, (0, 0))
             for event in pygame.event.get():
-            
+
                 if event.type == pygame.QUIT:
                     running = False
                     self.playerOne.paddle.resetPosition()
@@ -119,9 +133,12 @@ class Game:
             self.puck.collision(self.playerTwo.paddle)
 
             # Verify if the puck is in the gate area and it's a goal
-            self.puck.goal(self.playerOne.paddle, self.playerTwo.paddle)
+            self.puck.goal(self.playerOne, self.playerTwo)
+            self.updateScore()
 
             self.timeText.displayText()
+            self.playerOneName.displayText()
+            self.playerTwoName.displayText()
             self.playerOne.paddle.draw()
             self.playerTwo.paddle.draw()
             self.puck.draw()

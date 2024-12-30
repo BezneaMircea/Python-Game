@@ -5,8 +5,6 @@ import math
 # Puck radius
 PUCK_RADIUS = PUCK_DEFAULT_PNG.get_width() // 2
 
-EPSILON = 2
-
 class Puck():
 	def __init__(self, screen, x, y, dx, dy, radius, image, speed, margins):
 		"""Constructor for the puck class
@@ -31,6 +29,18 @@ class Puck():
 		self.dx = 0
 		self.dy = 0
 
+	def resetPlayerOnePuckPosition(self):
+		self.x = POSITION_PUCK_PLAYER_ONE[0]
+		self.y = POSITION_PUCK_PLAYER_ONE[1]
+		self.dx = 0
+		self.dy = 0
+
+	def resetPlayerTwoPuckPosition(self):
+		self.x = POSITION_PUCK_PLAYER_TWO[0]
+		self.y = POSITION_PUCK_PLAYER_TWO[1]
+		self.dx = 0
+		self.dy = 0
+
 	def collision(self, object):
 		"""Check if the puck collided with a paddle"""
 		dist = ((self.x - object.x) ** 2 + (self.y - object.y) ** 2) ** 0.5
@@ -39,12 +49,6 @@ class Puck():
 
 			self.dx = math.cos(collision_angle) * self.speed
 			self.dy = math.sin(collision_angle) * self.speed
-
-		if abs(self.dx) < 1:
-			self.dx = -self.dx
-	
-		if abs(self.dy) < 1:
-			self.dy = -self.dy
 
 	def move(self):
 		self.x += self.dx
@@ -75,21 +79,24 @@ class Puck():
 		self.x = max(self.margins[0], min(self.x, self.margins[1]))
 		self.y = max(self.margins[2], min(self.y, self.margins[3]))
 
-	def resetGameState(self, paddlePlayerOne, paddlePlayerTwo):
+	def resetPaddles(self, paddlePlayerOne, paddlePlayerTwo):
 		"""Reset puck and paddle positions after a goal"""
-		self.resetPosition()
 		paddlePlayerOne.resetPosition()
 		paddlePlayerTwo.resetPosition()
 
-	def goal(self, paddlePlayerOne, paddlePlayerTwo):
+	def goal(self, playerOne, playerTwo):
 		"""Check if the puck enters a goal and handle the state changes."""
 		if GOAL_TOP <= self.y <= GOAL_BOTTOM:
 			if self.x - self.radius <= self.margins[0]:
-				self.resetGameState(paddlePlayerOne, paddlePlayerTwo)
+				playerTwo.increaseScore()
+				self.resetPaddles(playerOne.paddle, playerTwo.paddle)
+				self.resetPlayerOnePuckPosition()
 				# Goal for Player 2
 				# Increment Player 2's score
 			elif self.x + self.radius >= self.margins[1]:
-				self.resetGameState(paddlePlayerOne, paddlePlayerTwo)
+				playerOne.increaseScore()
+				self.resetPaddles(playerOne.paddle, playerTwo.paddle)
+				self.resetPlayerTwoPuckPosition()
 				# Goal for Player 1
 				# Increment Player 1's score
 
