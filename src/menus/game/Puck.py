@@ -81,15 +81,17 @@ class Puck():
 		paddlePlayerOne.resetPosition()
 		paddlePlayerTwo.resetPosition()
 
-	def goal(self, paddlePlayerOne, paddlePlayerTwo):
+	def goal(self, playerOne, playerTwo):
 		"""Check if the puck enters a goal and handle the state changes."""
 		if GOAL_TOP <= self.y <= GOAL_BOTTOM:
 			if self.x - self.radius <= self.margins[0]:
-				self.resetGameState(paddlePlayerOne, paddlePlayerTwo)
+				playerTwo.score = playerTwo.score + 1
+				self.resetGameState(playerOne.paddle, playerTwo.paddle)
 				# Goal for Player 2
 				# Increment Player 2's score
 			elif self.x + self.radius >= self.margins[1]:
-				self.resetGameState(paddlePlayerOne, paddlePlayerTwo)
+				playerOne.score = playerOne.score + 1
+				self.resetGameState(playerOne.paddle, playerTwo.paddle)
 				# Goal for Player 1
 				# Increment Player 1's score
 

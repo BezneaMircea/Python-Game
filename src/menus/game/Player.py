@@ -5,6 +5,7 @@ import pygame
 class Player:
     def __init__(self, name, paddle, controls):
         self.name = name
+        self.score = 0
         self.paddle = paddle
         self.controls = controls
     
