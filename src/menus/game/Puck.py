@@ -5,8 +5,6 @@ import math
 # Puck radius
 PUCK_RADIUS = PUCK_DEFAULT_PNG.get_width() // 2
 
-EPSILON = 2
-
 class Puck():
 	def __init__(self, screen, x, y, dx, dy, radius, image, speed, margins):
 		"""Constructor for the puck class
@@ -39,12 +37,6 @@ class Puck():
 
 			self.dx = math.cos(collision_angle) * self.speed
 			self.dy = math.sin(collision_angle) * self.speed
-
-		if abs(self.dx) < 1:
-			self.dx = -self.dx
-	
-		if abs(self.dy) < 1:
-			self.dy = -self.dy
 
 	def move(self):
 		self.x += self.dx
@@ -85,12 +77,12 @@ class Puck():
 		"""Check if the puck enters a goal and handle the state changes."""
 		if GOAL_TOP <= self.y <= GOAL_BOTTOM:
 			if self.x - self.radius <= self.margins[0]:
-				playerTwo.score = playerTwo.score + 1
+				playerTwo.increaseScore()
 				self.resetGameState(playerOne.paddle, playerTwo.paddle)
 				# Goal for Player 2
 				# Increment Player 2's score
 			elif self.x + self.radius >= self.margins[1]:
-				playerOne.score = playerOne.score + 1
+				playerOne.increaseScore()
 				self.resetGameState(playerOne.paddle, playerTwo.paddle)
 				# Goal for Player 1
 				# Increment Player 1's score

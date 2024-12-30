@@ -20,7 +20,6 @@ from game.GameSetup import currentGameSettings
 from game.Game import Game
 
 
-
 # Can be changed depending on what resolution we want
 # Upper Text
 
@@ -74,7 +73,7 @@ def drawAllButtons():
 running = True
 
 #There are some problems here
-playSong(APO_SOLO_PATH_MP3)
+#playSong(APO_SOLO_PATH_MP3)
 
 
 while running:
@@ -110,12 +109,8 @@ while running:
                 if (playerTwoButton.isCursorOn(mouseCoord)):
                     playerMenu("Player Two", 2)
 
-    
-    
-
     drawAllButtons()
 
-    pygame.display.update()
-        
+    pygame.display.update()  
              
 pygame.quit()
