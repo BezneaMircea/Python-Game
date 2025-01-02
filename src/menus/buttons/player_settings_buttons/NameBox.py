@@ -24,6 +24,7 @@ class Boxes:
         if playerId == 2:
             self.boxPlayerTwo.draw()
 
+# Class to manage individual text boxes for player names
 class NameBox:
     def __init__(self, screen, x, y, width, height, font, text='', color=(255, 255, 255), bg_color=(0, 0, 0), border_color=(200, 200, 200)):
         self.screen = screen
