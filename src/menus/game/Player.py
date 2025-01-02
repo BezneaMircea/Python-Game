@@ -14,7 +14,7 @@ class Player:
 
     def increaseScore(self):
         self.score = self.score + 1
-        
+
 playerOne = Player('Player 1', paddleOne, (pygame.K_a, pygame.K_d, pygame.K_w, pygame.K_s))
 playerTwo = Player('Player 2', paddleTwo, (pygame.K_LEFT, pygame.K_RIGHT, pygame.K_UP, pygame.K_DOWN))
 
