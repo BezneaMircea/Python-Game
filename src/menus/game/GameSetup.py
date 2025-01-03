@@ -1,13 +1,14 @@
 from utils.pictures.table_pictures import *
 from game.Player import *
 from game.Puck import *
-
-CURRENT_MAP = DEFAULT_TABLE_PNG
+from game.Gate import *
 
 class GameSetup:
-    def __init__(self, currentTableImg, playerOne,
+    def __init__(self, currentTableImg, gateLeft, gateRight, playerOne,
                  playerTwo, puck, time):
         self.currentTableImg = currentTableImg
+        self.gateLeft = gateLeft
+        self.gateRight = gateRight
         self.playerOne = playerOne
         self.playerTwo = playerTwo
         self.puck = puck
@@ -28,7 +29,7 @@ class GameSetup:
 
 time = 150
 
-currentGameSettings = GameSetup(DEFAULT_TABLE_PNG, playerOne,
+currentGameSettings = GameSetup(DEFAULT_TABLE_PNG, gateLeft, gateRight, playerOne,
                                  playerTwo, puck, time)
 
 __all__ = ['currentGameSettings']
