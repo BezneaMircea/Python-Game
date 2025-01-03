@@ -81,8 +81,10 @@ def playerMenu(text, playerId):
                     playerPaddleSelection.changeWithRightPaddle(playerId)
 
             nameBoxes.write(event, playerId)
-            
-            
+
+        # Process if key is held down
+        nameBoxes.processHeldKeys(playerId)
+
         drawAllButtons(playerId)
         
         pygame.display.update()
