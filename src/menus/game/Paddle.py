@@ -59,11 +59,11 @@ class Paddle():
         self.screen.blit(self.image, self.imageRect)
 
     def isCollidingWithPuck(self, dx, dy):
-        new_x = self.x + dx
-        new_y = self.y + dy
+        newX = self.x + dx
+        newY = self.y + dy
         
         # Calculate the distance between the paddle and the puck
-        dist = math.sqrt((new_x - puck.x) ** 2 + (new_y - puck.y) ** 2)
+        dist = math.sqrt((newX - puck.x) ** 2 + (newY - puck.y) ** 2)
 
         # If the distance between the paddle and the puck is smaller than the sum of their radius,
         # there is a collision
