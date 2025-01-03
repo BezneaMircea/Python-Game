@@ -20,6 +20,7 @@ class Game:
 		self.scoreText = TextButton(SCREEN, 690, SCREEN_WIDTH / 2,  f"{self.playerOne.score} - {self.playerTwo.score}", PRESS_START_2P, 30, YELLOW)
 		self.playerOneName = TextButton(SCREEN, 30, 300, self.playerOne.name, PRESS_START_2P, 30, YELLOW)
 		self.playerTwoName = TextButton(SCREEN, 30, 1000, self.playerTwo.name, PRESS_START_2P, 30, YELLOW)
+		self.gateLeft, self.gateRight = currentGameSettings.gateLeft, currentGameSettings.gateRight
 
 	def returnTimeText(self, time : int) -> str:
 		minutes = math.floor(time / 60)
@@ -41,6 +42,8 @@ class Game:
 			self.scoreText.displayText()
 			self.playerOneName.displayText()
 			self.playerTwoName.displayText()
+			self.gateLeft.draw()
+			self.gateRight.draw()
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
 					pygame.quit()
@@ -134,6 +137,8 @@ class Game:
 	def renderGame(self):
 		'''Update the game on the screen and every element in it'''
 		SCREEN.blit(self.tableImg, (0, 0))
+		self.gateLeft.draw()
+		self.gateRight.draw()
 		self.timeText.displayText()
 		self.scoreText.displayText()
 		self.playerOneName.displayText()

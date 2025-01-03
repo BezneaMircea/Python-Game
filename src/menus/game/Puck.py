@@ -45,10 +45,10 @@ class Puck():
 		"""Check if the puck collided with a paddle"""
 		dist = ((self.x - object.x) ** 2 + (self.y - object.y) ** 2) ** 0.5
 		if dist <= self.radius + object.radius + EPSILON:
-			collision_angle = math.atan2(self.y - object.y, self.x - object.x)
+			collisionAngle = math.atan2(self.y - object.y, self.x - object.x)
 
-			self.dx = math.cos(collision_angle) * self.speed
-			self.dy = math.sin(collision_angle) * self.speed
+			self.dx = math.cos(collisionAngle) * self.speed
+			self.dy = math.sin(collisionAngle) * self.speed
 
 	def move(self):
 		self.x += self.dx
