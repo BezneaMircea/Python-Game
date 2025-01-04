@@ -2,7 +2,7 @@ import pygame
 import numpy as np
 from utils.pictures.table_pictures import *
 from utils.constants.MenuConstants import *
-from buttons.settings_buttons.MapSelect import (
+from menus.buttons.settings_buttons.MapSelect import (
     IMAGE_SIZE,
     IMAGE_SIZE_SMALL,
     
@@ -36,10 +36,13 @@ class MapSelectionBorders():
         self.borderCentre = borderCentre
         self.borderRight = borderRight
         
-    def draw(self):
+    def drawButton(self):
         self.borderRight.drawButton()
         self.borderCentre.drawButton()
         self.borderLeft.drawButton()
+        
+    def performAction(self):
+        pass
 
 
 mapSelectionBorders = MapSelectionBorders(borderLeft, borderCentre, borderRight)

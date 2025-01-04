@@ -11,11 +11,12 @@ from utils.colors.Colors import *
 from utils.fonts.Fonts import PRESS_START_2P
 from utils.music.Music import *
 
+
 from menus.buttons.start_buttons.Quit import *
-from menus.buttons.start_buttons.Setting import *
-from menus.buttons.start_buttons.Play import *
-from menus.buttons.start_buttons.PlayerOne import *
-from menus.buttons.start_buttons.PlayerTwo import *
+# from menus.buttons.start_buttons.Setting import *
+# from menus.buttons.start_buttons.Play import *
+# from menus.buttons.start_buttons.PlayerOne import *
+# from menus.buttons.start_buttons.PlayerTwo import *
 
 
 # from menus.SettingMenu import settingsMenu
@@ -62,7 +63,7 @@ class StartMenu(Menu):
                     isLeftButtonPressed = pygame.mouse.get_pressed()[0]
                     
                     if isLeftButtonPressed:
-                        self.performButtonActions()
+                        self.performButtonActions(mouseCoord)
                         if (quitButton.isCursorOn(mouseCoord)):
                             running = False
 

@@ -2,7 +2,7 @@ from utils.pictures.buttons_pictures import BARA_PNG, SCROLL_BUTTON_PNG
 from utils.constants.MenuConstants import *
 from utils.fonts.Fonts import PRESS_START_2P
 from utils.colors.Colors import *
-from buttons.settings_buttons.control_bars.ControlBar import ControlBar
+from menus.buttons.settings_buttons.control_bars.ControlBar import ControlBar
 from game.GameSetup import currentGameSettings
 from utils.RectButton import RectButton
 from utils.TextButton import TextButton

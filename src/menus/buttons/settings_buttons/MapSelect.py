@@ -76,10 +76,13 @@ class MapSelect:
         
         currentGameSettings.changeTable(self.curImg[2])
         
-    def draw(self):
+    def drawButton(self):
         self.mapSelect.drawButton()
         self.mapLeft.drawButton()
         self.mapRight.drawButton()
+        
+    def performAction(self):
+        pass
 
 mapSelection = MapSelect(imageListLeft, imageListRight, currentImage,
                          mapSelect, mapLeft, mapRight)

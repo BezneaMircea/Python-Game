@@ -14,7 +14,7 @@ class ControlBar():
         self.minValue = minValue
         self.unit = (maxValue - minValue) / (rightMax - leftMax)
 
-    def draw(self):
+    def drawButton(self):
         self.bar.drawButton()
         self.barButton.drawButton()
         self.textButton.displayText()
@@ -38,6 +38,8 @@ class ControlBar():
     def changeValueToText(self):
         pass
 
+    def performAction(self):
+        pass
     
     
         
