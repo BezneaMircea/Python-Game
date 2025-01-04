@@ -1,7 +1,6 @@
 import pygame
 import time
 
-from utils.RectButton import RectButton
 from utils.constants.MenuConstants import *
 from utils.fonts.Fonts import *
 from game.Player import *
@@ -32,15 +31,17 @@ class Boxes:
             self.boxPlayerTwo.draw()
 
 # Class to manage individual text boxes for player names
-class NameBox(RectButton):
-    def __init__(self, screen, xPos, yPos, image, font, text, textColour, maxChars):
-        super().__init__(screen, xPos, yPos, image)
-
+class NameBox:
+    def __init__(self, screen, x, y, width, height, font, text='', color=(255, 255, 255), bgColor=(0, 0, 0), borderColor=(200, 200, 200)):
+        self.screen = screen
+        self.rect = pygame.Rect(x, y, width, height)
         self.font = font
         self.text = text
-        self.textColout = textColour
-        self.maxChars = maxChars
+        self.color = color
+        self.bgColor = bgColor
+        self.borderColor = borderColor
         self.active = False
+        self.offset = 0  # Offset for the blinking cursor
         self.cursorVisible = True
         self.lastBlinkTime = time.time()
         self.cursorPos = len(text)

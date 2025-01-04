@@ -3,7 +3,7 @@ import pygame
 
 from utils.pictures.buttons_pictures import *
 
-from utils.colors.Colors import YELLOW
+from utils.colors.Colors import YELLOW, CYAN
 from utils.constants.MenuConstants import *
 from utils.fonts.Fonts import PRESS_START_2P
 from utils.constants.MenuConstants import SCREEN
@@ -16,7 +16,7 @@ playColour = YELLOW
 playFont = pygame.font.FontType(PRESS_START_2P, 35)
 
 playButton = RectButton(SCREEN, xPosPlay, yPosPlay, BUTTON_PNG)
-playButton.addTextToButton(playText, playFont, playColour)
+playButton.addTextToButton(playText, playFont, playColour, CYAN)
 
 
 __all__ = ['playButton']

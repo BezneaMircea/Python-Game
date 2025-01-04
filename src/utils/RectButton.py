@@ -47,9 +47,9 @@ class RectButton():
         textRect = textSurface.get_rect(center=self.imageRect.center)
         self.textSurface = textSurface
         self.textRect = textRect
-
     
-    def addTextToButton(self, text, font, color):
+    
+    def addTextToButton(self, text, font, color, interactColor):
         """ Method used to add text in a button
 
         Args:
@@ -60,6 +60,7 @@ class RectButton():
         self.text = text
         self.color = color
         self.font = font
+        self.interactColor = interactColor
         
         textSurface = font.render(text, True, color)
         textRect = textSurface.get_rect(center=self.imageRect.center)
@@ -76,4 +77,13 @@ class RectButton():
         self.imageRect = self.image.get_rect(center=(self.yPos, self.xPos))
 
         
+    def interactWithCursor(self, mouseCoord):
+        if (self.isCursorOn(mouseCoord)):
+            auxColor = self.color
+            self.changeTextColor(self.interactColor)
+            self.color = auxColor
+        else:
+            self.changeTextColor(self.color)
     
+    def performAction(self):
+        pass
