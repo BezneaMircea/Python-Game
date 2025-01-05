@@ -12,8 +12,7 @@ from utils.RectButton import RectButton
 from menus.buttons.general_buttons.back import backButton
 from menus.buttons.settings_buttons.MapSelect import mapSelection
 
-from menus.buttons.general_buttons.swipeLeftButton import swipeLeftButton
-from menus.buttons.general_buttons.swipeRightButton import swipeRightButton
+from menus.buttons.general_buttons.swipeRightButton import swipeRightButton, swipeLeftButton
 from menus.buttons.settings_buttons.Borders import mapSelectionBorders
 from menus.buttons.settings_buttons.control_bars.TimeControl import timeControl
 from menus.buttons.settings_buttons.control_bars.VolumeControl import volumeControl
@@ -24,9 +23,13 @@ class SettingButton(RectButton):
     def __init__(self, screen, xPos, yPos, image):
         super().__init__(screen, xPos, yPos, image)
         
-    def performAction(self):
-        rectButtonsSettingsMenu = [backButton, mapSelection, mapSelectionBorders ,swipeLeftButton,
-                                   swipeRightButton, timeControl, volumeControl]
+    def performAction(self, mouseCoord):
+        if not self.isCursorOn(mouseCoord):
+            return
+        # rectButtonsSettingsMenu = [backButton, mapSelection, mapSelectionBorders ,swipeLeftButton,
+        #                            swipeRightButton, timeControl, volumeControl]
+        rectButtonsSettingsMenu = [backButton, swipeRightButton, swipeLeftButton,
+                                   mapSelection, mapSelectionBorders, timeControl, volumeControl]
         
         settingsMenu = SettingsMenu(SCREEN, rectButtonsSettingsMenu, None)
         settingsMenu.settingsMenuLoop()

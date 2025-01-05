@@ -14,8 +14,8 @@ from menus.buttons.general_buttons.back import *
 # from menus.buttons.general_buttons.swipeLeftButton import swipeLeftButton
 # from menus.buttons.general_buttons.swipeRightButton import swipeRightButton
 # from menus.buttons.settings_buttons.Borders import *
-# from menus.buttons.settings_buttons.control_bars.TimeControl import timeControl
-# from menus.buttons.settings_buttons.control_bars.VolumeControl import volumeControl
+from menus.buttons.settings_buttons.control_bars.TimeControl import timeControl
+from menus.buttons.settings_buttons.control_bars.VolumeControl import volumeControl
 
 from game.GameSetup import *
 
@@ -31,13 +31,13 @@ class SettingsMenu(Menu):
     def __init__(self, screen, rectButtons, textButtons):
         super().__init__(rectButtons, textButtons)
         self.screen = screen
-
+    
     def settingsMenuLoop(self):
 
         running = True
 
-        # isPressedTime = False
-        # isPressedVolume = False
+        isPressedTime = False
+        isPressedVolume = False
         while running:
             
             SCREEN.blit(BACK_GROUND_JPEG, (0, 0))
@@ -59,35 +59,30 @@ class SettingsMenu(Menu):
                         self.performButtonActions(mouseCoord)
                         if (backButton.isCursorOn(mouseCoord)):
                             running = False
-                            
-                        # if (swipeLeftButton.isCursorOn(mouseCoord)):
-                        #     mapSelection.changeWithTableOnLeft()
 
-                        # if (swipeRightButton.isCursorOn(mouseCoord)):
-                        #     mapSelection.changeWithTableOnRight()
             
-            # mouseCoord = pygame.mouse.get_pos()
-            # pressedMouse = pygame.mouse.get_pressed()
-            
-            
-            # if (timeControl.barButton.isCursorOn(mouseCoord) and pressedMouse[0]
-            #     and not isPressedVolume):
-            #     isPressedTime = True
-            
-            # if (volumeControl.barButton.isCursorOn(mouseCoord) and pressedMouse[0]
-            #     and not isPressedTime):
-            #     isPressedVolume = True
+                # mouseCoord = pygame.mouse.get_pos()
+                # pressedMouse = pygame.mouse.get_pressed()
                 
-            
-            # if not pressedMouse[0]:
-            #     isPressedTime = False
-            #     isPressedVolume = False
+                
+                # if (timeControl.barButton.isCursorOn(mouseCoord) and pressedMouse[0]
+                #     and not isPressedVolume):
+                #     isPressedTime = True
+                
+                # if (volumeControl.barButton.isCursorOn(mouseCoord) and pressedMouse[0]
+                #     and not isPressedTime):
+                #     isPressedVolume = True
+                    
+                
+                # if not pressedMouse[0]:
+                #     isPressedTime = False
+                #     isPressedVolume = False
 
-            # if (isPressedTime):
-            #     timeControl.move(mouseCoord)
-            
-            # if (isPressedVolume):
-            #     volumeControl.move(mouseCoord)
+                # if (isPressedTime):
+                #     timeControl.move(mouseCoord)
+                
+                # if (isPressedVolume):
+                #     volumeControl.move(mouseCoord)
             
             super().drawAllButtons()
             

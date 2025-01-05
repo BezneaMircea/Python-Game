@@ -40,8 +40,11 @@ class MapSelectionBorders():
         self.borderRight.drawButton()
         self.borderCentre.drawButton()
         self.borderLeft.drawButton()
-        
-    def performAction(self):
+    
+    def interactWithCursor(self, mouseCoord):
+        pass
+
+    def performAction(self, mouseCoord):
         pass
 
 

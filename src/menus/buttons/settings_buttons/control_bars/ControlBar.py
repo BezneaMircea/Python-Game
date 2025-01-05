@@ -1,3 +1,5 @@
+import pygame
+
 class ControlBar():
     def __init__(self, bar, barButton, textButton, leftMax,
                  rightMax, valueButton, originalValue, maxValue, minValue):
@@ -13,6 +15,7 @@ class ControlBar():
         self.maxValue = maxValue
         self.minValue = minValue
         self.unit = (maxValue - minValue) / (rightMax - leftMax)
+        self.isPressed = False
 
     def drawButton(self):
         self.bar.drawButton()
@@ -38,8 +41,20 @@ class ControlBar():
     def changeValueToText(self):
         pass
 
-    def performAction(self):
+    def interactWithCursor(self, mouseCoord):
         pass
+
+    def performAction(self, mouseCoord):
+        pressedMouse = pygame.mouse.get_pressed()
+        if (self.barButton.isCursorOn(mouseCoord) and pressedMouse[0]):
+            self.isPressed = True
+        
+        if not pressedMouse[0]:
+            self.isPressed = False
+        
+        if self.isPressed:
+            self.move(mouseCoord)
+        
     
     
         

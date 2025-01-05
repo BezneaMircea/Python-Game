@@ -81,7 +81,10 @@ class MapSelect:
         self.mapLeft.drawButton()
         self.mapRight.drawButton()
         
-    def performAction(self):
+    def interactWithCursor(self, mouseCoord):
+        pass
+
+    def performAction(self, mouseCoord):
         pass
 
 mapSelection = MapSelect(imageListLeft, imageListRight, currentImage,

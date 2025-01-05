@@ -31,5 +31,4 @@ class Menu():
     
     def performButtonActions(self, mouseCoord):
         for rectButton in self.rectButtons:
-            if (rectButton.isCursorOn(mouseCoord)):
-                rectButton.performAction()
+            rectButton.performAction(mouseCoord)
