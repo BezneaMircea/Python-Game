@@ -7,3 +7,5 @@ echo "Launching the game..."
 cd src/menus
 python3 StartMenu.py
 cd ../..
+find ./src/menus -type d -name "__pycache__" -exec rm -r {} +
+
