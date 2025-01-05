@@ -47,44 +47,20 @@ paddleRightOne = RectButton(SCREEN, SMALL_PICTURE_XPOS, SMALL_PICTURE_YPOS_RIGHT
 paddleTwo = RectButton(SCREEN, CENTER_PICTURE_XPOS, CENTER_PICTURE_YPOS, imageDefaultMedium)
 paddleLeftTwo = RectButton(SCREEN, SMALL_PICTURE_XPOS, SMALL_PICTURE_YPOS_LEFT, imagePurpleSmall)
 paddleRightTwo = RectButton(SCREEN, SMALL_PICTURE_XPOS, SMALL_PICTURE_YPOS_RIGHT, imageBlueSmall)
-
-
-class PlayerMenu:
-    def __init__(self, paddleSelectOne, paddleSelectTwo):
-        self.paddleSelectOne = paddleSelectOne
-        self.paddleSelectTwo = paddleSelectTwo
-
-    def changeWithLeftPaddle(self, id):
-        if id == 1:
-            self.paddleSelectOne.changeWithLeft(id)
-        if id == 2:
-            self.paddleSelectTwo.changeWithLeft(id)    
-
-    def changeWithRightPaddle(self, id):
-        if id == 1:
-            self.paddleSelectOne.changeWithRight(id)
-        if id == 2:
-            self.paddleSelectTwo.changeWithRight(id)
-    
-    def draw(self, id):
-        if id == 1:
-            self.paddleSelectOne.draw()
-        if id == 2:
-            self.paddleSelectTwo.draw()
-            
             
 
 class PaddleSelect:
     def __init__(self, imageListLeft, imageListRight, curImg,
-                 paddleSelect, paddleLeft, paddleRight):
+                 paddleSelect, paddleLeft, paddleRight, ownerId):
         self.imageListLeft = imageListLeft
         self.imageListRight = imageListRight
         self.curImg = curImg
         self.paddleSelect = paddleSelect
         self.paddleLeft = paddleLeft
         self.paddleRight = paddleRight
+        self.ownerId = ownerId
         
-    def changeWithLeft(self, id):
+    def changeWithLeft(self):
         if not self.imageListLeft:
             return
         
@@ -97,10 +73,10 @@ class PaddleSelect:
         self.paddleLeft.changeButtonImg(self.imageListLeft[0][0])
         self.paddleRight.changeButtonImg(self.imageListRight[0][0])
         
-        currentGameSettings.changePlayerPaddleImg(id, self.curImg[2])
+        currentGameSettings.changePlayerPaddleImg(self.ownerId, self.curImg[2])
 
 
-    def changeWithRight(self, id):
+    def changeWithRight(self):
         if not self.imageListRight:
             return
 
@@ -113,21 +89,26 @@ class PaddleSelect:
         self.paddleLeft.changeButtonImg(self.imageListLeft[0][0])
         self.paddleRight.changeButtonImg(self.imageListRight[0][0])
         
-        currentGameSettings.changePlayerPaddleImg(id, self.curImg[2])
+        currentGameSettings.changePlayerPaddleImg(self.ownerId, self.curImg[2])
     
-    def draw(self):
+    def drawButton(self):
         self.paddleSelect.drawButton()
         self.paddleLeft.drawButton()
         self.paddleRight.drawButton()
         
+    def interactWithCursor(self, mouseCoord):
+        pass
+    
+    def performAction(self, mouseCoord, pressed):
+        pass
+        
 
 
 paddleSelectOne = PaddleSelect(imageListOneLeft, imageListOneRight, currentImageOne,
-                               paddleOne, paddleLeftOne, paddleRightOne)
+                               paddleOne, paddleLeftOne, paddleRightOne, 1)
 paddleSelectTwo = PaddleSelect(imageListTwoLeft, imageListTwoRight, currentImageTwo,
-                               paddleTwo, paddleLeftTwo, paddleRightTwo)
+                               paddleTwo, paddleLeftTwo, paddleRightTwo, 2)
 
-playerPaddleSelection = PlayerMenu(paddleSelectOne, paddleSelectTwo)
 
 
 __all__ = ['playerPaddleSelection']

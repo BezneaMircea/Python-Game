@@ -5,8 +5,7 @@ from utils.pictures.menu_pictures import BACK_GROUND_JPEG
 from utils.constants.MenuConstants import *
 from menus.StartMenu import StartMenu
 from menus.buttons.start_buttons.Quit import *
-from menus.buttons.start_buttons.PlayerTwo import *
-from menus.buttons.start_buttons.PlayerOne import *
+from menus.buttons.start_buttons.PlayerOne import playerOneButton, playerTwoButton
 from menus.buttons.start_buttons.Play import *
 
 from menus.StartMenu import startMenuText

@@ -46,7 +46,7 @@ class MapSelect:
         self.mapLeft = mapLeft
         self.mapRight = mapRight
     
-    def changeWithTableOnLeft(self):
+    def changeWithLeft(self):
         if not self.imageListLeft:
             return
         
@@ -61,7 +61,7 @@ class MapSelect:
         
         currentGameSettings.changeTable(self.curImg[2])
         
-    def changeWithTableOnRight(self):
+    def changeWithRight(self):
         if not self.imageListRight:
             return
 

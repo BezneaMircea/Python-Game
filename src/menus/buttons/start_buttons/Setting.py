@@ -10,7 +10,7 @@ from utils.fonts.Fonts import PRESS_START_2P
 from utils.constants.MenuConstants import SCREEN
 from utils.RectButton import RectButton
 
-from menus.buttons.general_buttons.back import backButtonSettings
+from menus.buttons.general_buttons.back import backButton
 from menus.buttons.settings_buttons.MapSelect import mapSelection
 from menus.buttons.general_buttons.swipeRightButton import swipeRightButton, swipeLeftButton
 from menus.buttons.settings_buttons.Borders import mapSelectionBorders
@@ -26,7 +26,7 @@ class SettingButton(RectButton):
         super().__init__(screen, xPos, yPos, image)
         rectButtonsSettingsMenu = [swipeRightButton, swipeLeftButton,
                                    mapSelection, mapSelectionBorders,
-                                   timeControl, volumeControl, backButtonSettings]
+                                   timeControl, volumeControl, backButton]
         textButtonsSettingsMenu = [settingsMenuText]
         self.settingsMenu = SettingsMenu(rectButtonsSettingsMenu, textButtonsSettingsMenu, BACK_GROUND_JPEG)
         

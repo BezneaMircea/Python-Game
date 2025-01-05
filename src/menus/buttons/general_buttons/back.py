@@ -27,7 +27,7 @@ class BackButton(RectButton):
             return True
 
 
-backButtonSettings = BackButton(SCREEN, xPosBack, yPosBack, BUTTON_PNG)
-backButtonSettings.addTextToButton(backText, fontBack, backColour, RED)
+backButton = BackButton(SCREEN, xPosBack, yPosBack, BUTTON_PNG)
+backButton.addTextToButton(backText, fontBack, backColour, RED)
 
-__all__ = ['backButtonSettings']
+__all__ = ['backButton']
