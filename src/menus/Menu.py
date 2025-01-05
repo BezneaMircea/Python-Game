@@ -52,18 +52,17 @@ class Menu():
 
             SCREEN.blit(self.backGroundPicture, (0, 0))  
             
-            for event in pygame.event.get():        
-                
+            for event in pygame.event.get():
+
                 if event.type == pygame.QUIT:
                     self.running = False
                     pygame.quit()
                 
                 mouseCoord = pygame.mouse.get_pos()
                 pressed = pygame.mouse.get_pressed()
-
+                
                 self.buttonsInteractions(mouseCoord)
                 self.performButtonActions(mouseCoord, pressed)
-            self.drawAllButtons()
             
-
+            self.drawAllButtons()
             pygame.display.update()  

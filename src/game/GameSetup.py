@@ -25,6 +25,12 @@ class GameSetup:
             self.playerTwo.changePlayerPaddle(newImg)
             return
         IndexError
+    
+    def changePlayerName(self, playerId, newName):
+        if playerId == 1:
+            self.playerOne.changeName(newName)
+        elif playerId == 2:
+            self.playerTwo.changeName(newName)
 
 
 time = 150

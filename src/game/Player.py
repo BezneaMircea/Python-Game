@@ -11,6 +11,9 @@ class Player:
     
     def changePlayerPaddle(self, image):
         self.paddle.changeImg(image)
+    
+    def changeName(self, newName):
+        self.name = newName
 
     def increaseScore(self):
         self.score = self.score + 1

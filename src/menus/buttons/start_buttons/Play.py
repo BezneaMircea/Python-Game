@@ -22,14 +22,12 @@ class Play(RectButton):
             game.start()
 
 
-playText = 'Play'
 xPosPlay = SCREEN_HEIGHT - (SCREEN_HEIGHT) / 10 - 2 * DISTANCE_BEETWEEN_BUTTONS
 yPosPlay = SCREEN_WIDTH / 2
-playColour = YELLOW
-playFont = pygame.font.FontType(PRESS_START_2P, 35)
-
 playButton = Play(SCREEN, xPosPlay, yPosPlay, BUTTON_PNG)
-playButton.addTextToButton(playText, playFont, playColour, CYAN)
+
+playFont = pygame.font.FontType(PRESS_START_2P, 35)
+playButton.addTextToButton('Play', playFont, YELLOW, CYAN)
 
 
 __all__ = ['playButton']

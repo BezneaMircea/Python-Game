@@ -12,7 +12,7 @@ from utils.RectButton import RectButton
 
 from menus.buttons.general_buttons.back import backButton
 from menus.buttons.settings_buttons.MapSelect import mapSelection
-from menus.buttons.general_buttons.swipeRightButton import swipeRightButton, swipeLeftButton
+from menus.buttons.general_buttons.swipeButtons import swipeRightButton, swipeLeftButton
 from menus.buttons.settings_buttons.Borders import mapSelectionBorders
 from menus.buttons.settings_buttons.control_bars.TimeControl import timeControl
 from menus.buttons.settings_buttons.control_bars.VolumeControl import volumeControl

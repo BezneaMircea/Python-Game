@@ -23,7 +23,7 @@ class VolumeControlBar(ControlBar):
     def __init__(self, bar, barButton, textButton, leftMax,
                  rightMax, valueButton, originalValue, maxValue, minValue):
         super().__init__(bar, barButton, textButton, leftMax, rightMax, valueButton,
-                       originalValue, maxValue, minValue)
+                        originalValue, maxValue, minValue)
 
 
     def changeValueToText(self):

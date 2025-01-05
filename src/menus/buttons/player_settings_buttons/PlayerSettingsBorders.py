@@ -2,7 +2,7 @@ import pygame
 import numpy as np
 from utils.pictures.paddle_pictures import CIRCLE_BORDER_PNG
 from utils.constants.MenuConstants import *
-from buttons.player_settings_buttons.PaddleSelect import (
+from menus.buttons.player_settings_buttons.PaddleSelect import (
     IMAGE_SIZE,
     IMAGE_SIZE_SMALL,
     
@@ -30,16 +30,23 @@ borderLeft = RectButton(SCREEN, SMALL_PICTURE_XPOS, SMALL_PICTURE_YPOS_LEFT, ima
 borderCentre = RectButton(SCREEN, CENTER_PICTURE_XPOS, CENTER_PICTURE_YPOS, imageBorderMedium)
 borderRight = RectButton(SCREEN, SMALL_PICTURE_XPOS, SMALL_PICTURE_YPOS_RIGHT, imageBorderSmall)
 
-class PlayerSettingsBorders:
+class PlayerSettingsBorders():
     def __init__(self, borderLeft, borderCentre, borderRight):
         self.borderLeft = borderLeft
         self.borderCentre = borderCentre
         self.borderRight = borderRight
         
-    def draw(self):
+    def drawButton(self):
         self.borderLeft.drawButton()
         self.borderCentre.drawButton()
         self.borderRight.drawButton()
+    
+    def interactWithCursor(self, mouseCoord):
+        pass
+
+    def performAction(self, mouseCoord, pressed):
+        pass
+
 
 playerSettingsBorders = PlayerSettingsBorders(borderLeft, borderCentre, borderRight)
 

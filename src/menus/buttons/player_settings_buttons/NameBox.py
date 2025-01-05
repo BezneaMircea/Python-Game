@@ -2,141 +2,60 @@ import pygame
 import time
 
 from utils.constants.MenuConstants import *
-from utils.fonts.Fonts import *
-from game.Player import *
+from utils.pictures.buttons_pictures import NAMEBOX_PNG
+from utils.fonts.Fonts import PRESS_START_2P
+from utils.colors.Colors import CYAN
+from game.GameSetup import currentGameSettings
+from utils.RectButton import RectButton
 
-class Boxes:
-    def __init__(self, boxPlayerOne, boxPlayerTwo):
-        self.boxPlayerOne = boxPlayerOne
-        self.boxPlayerTwo = boxPlayerTwo
+VALID_CHARACTERS = "abcdefghijklmnopqrstuvwxyz0123456789"
+WAS_WRITTEN = [False] * len(VALID_CHARACTERS)
 
-    def write(self, event, playerId):
-        if playerId == 1:
-            self.boxPlayerOne.write(event)
-            playerOne.name = self.boxPlayerOne.text
-        if playerId == 2:
-            self.boxPlayerTwo.write(event)
-            playerTwo.name = self.boxPlayerTwo.text
+class NameBox(RectButton):
+    def __init__(self, screen, xPos, yPos, image, text, font, color, interactColor, ownerId):
+        super().__init__(screen, xPos, yPos, image)
+        self.addTextToButton(text, font, color, interactColor)
+        self.ownerId = ownerId
+        self.isPressed = False
+        self.maxlen = 11
+        #currentGameSettings.changePlayerName(self.ownerId, self.text)
+    
+    
+    def performAction(self, mouseCoord, pressed):
+        keys = pygame.key.get_pressed()  # Returns a list of all keys
+        if (self.isCursorOn(mouseCoord) and pressed[0]):
+            self.isPressed = True
+        elif pressed[0] or keys[pygame.K_RETURN]:
+            self.isPressed = False
+        if self.isPressed:
+            self.writing(keys)
 
-    def processHeldKeys(self, playerId):
-        if playerId == 1:
-            self.boxPlayerOne.processHeldKeys()
-        if playerId == 2:
-            self.boxPlayerTwo.processHeldKeys()
-
-    def draw(self, playerId):
-        if playerId == 1:
-            self.boxPlayerOne.draw()
-        if playerId == 2:
-            self.boxPlayerTwo.draw()
-
-# Class to manage individual text boxes for player names
-class NameBox:
-    def __init__(self, screen, x, y, width, height, font, text='', color=(255, 255, 255), bgColor=(0, 0, 0), borderColor=(200, 200, 200)):
-        self.screen = screen
-        self.rect = pygame.Rect(x, y, width, height)
-        self.font = font
-        self.text = text
-        self.color = color
-        self.bgColor = bgColor
-        self.borderColor = borderColor
-        self.active = False
-        self.offset = 0  # Offset for the blinking cursor
-        self.cursorVisible = True
-        self.lastBlinkTime = time.time()
-        self.cursorPos = len(text)
-        self.lastKeyTime = 0  # To control the repeat rate
-        self.keyRepeatInterval = 0.2  # Seconds between key repeats
-
-    def write(self, event):
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            # Check if the user clicked on the name box
-            self.active = self.rect.collidepoint(event.pos)
-        
-        if event.type == pygame.KEYDOWN and self.active:
-            self.processKey(event.key, event.unicode)
-
-    def processKey(self, key, unicode):
-        """Handles text modification when a key is pressed."""
-        if key == pygame.K_BACKSPACE:
-            if self.cursorPos > 0:
-                self.text = self.text[:self.cursorPos - 1] + self.text[self.cursorPos:]
-                self.cursorPos -= 1
-        elif key == pygame.K_LEFT:
-            self.cursorPos = max(0, self.cursorPos - 1)
-        elif key == pygame.K_RIGHT:
-            self.cursorPos = min(len(self.text), self.cursorPos + 1)
-        elif key == pygame.K_DELETE:
-            if self.cursorPos < len(self.text):
-                self.text = self.text[:self.cursorPos] + self.text[self.cursorPos + 1:]
+    
+    def interactWithCursor(self, mouseCoord):
+        if (self.isCursorOn(mouseCoord) or self.isPressed):
+            auxColor = self.color
+            self.changeTextColor(self.interactColor)
+            self.color = auxColor
         else:
-            self.text = self.text[:self.cursorPos] + unicode + self.text[self.cursorPos:]
-            self.cursorPos += 1
-
-        # Adjust the offset if the text is too long
-        self.adjustOffset()
-
-    def adjustOffset(self):
-        textWidth = self.font.size(self.text[:self.cursorPos])[0]
-        if textWidth - self.offset > self.rect.width - 10:  # 10 pixels padding
-            self.offset = textWidth - (self.rect.width - 10)
-        elif textWidth < self.offset:
-            self.offset = textWidth
-
-    def processHeldKeys(self):
-        """Processes continuous input by checking pressed keys."""
-        if self.active:
-            keys = pygame.key.get_pressed()
-            currentTime = time.time()
-
-            if currentTime - self.lastKeyTime > self.keyRepeatInterval:
-                if keys[pygame.K_BACKSPACE]:
-                    self.processKey(pygame.K_BACKSPACE, '')
-                elif keys[pygame.K_LEFT]:
-                    self.processKey(pygame.K_LEFT, '')
-                elif keys[pygame.K_RIGHT]:
-                    self.processKey(pygame.K_RIGHT, '')
-                elif keys[pygame.K_DELETE]:
-                    self.processKey(pygame.K_DELETE, '')
-
-                self.lastKeyTime = currentTime
-
-    def draw(self):
-        # Draw the background
-        pygame.draw.rect(self.screen, self.bgColor, self.rect)
-        # Draw the border
-        pygame.draw.rect(self.screen, self.bgColor, self.rect, 2)
+            self.changeTextColor(self.color)
+    
+    def writing(self, keys):
+        global VALID_CHARACTERS
+        global WAS_WRITTEN
+        if keys[pygame.K_BACKSPACE]:
+            self.changeButtonText(self.text[:-1])
+            return
         
-        # Render the visible portion of the text
-        textSurface = self.font.render(self.text, True, self.color)
-        textWidth, textHeight = self.font.size(self.text)
-
-        # Create a surface for the visible text
-        visibleTextSurface = pygame.Surface((self.rect.width - 10, self.rect.height), pygame.SRCALPHA)
-        visibleTextSurface.fill((0, 0, 0, 0))  # Make the surface transparent
-        visibleTextSurface.blit(textSurface, (-self.offset, 0))
-        self.screen.blit(visibleTextSurface, (self.rect.x + 5, self.rect.y + (self.rect.height - textHeight) // 2))
-
-        # Blink cursor is active
-        if self.active:
-            currentTime = time.time()
-            if currentTime - self.lastBlinkTime > 0.3: # 0.5 secunde between blinks
-                self.cursorVisible = not self.cursorVisible
-                self.lastBlinkTime = currentTime
+        for char in VALID_CHARACTERS:
             
-            if self.cursorVisible:
-                cursorX = self.rect.x + 5 + self.font.size(self.text[:self.cursorPos])[0] - self.offset
-                if self.rect.x + 5 <= cursorX <= self.rect.x + self.rect.width - 5:
-                    pygame.draw.line(self.screen, self.color,
-                                     (cursorX, self.rect.y + 5),
-                                     (cursorX, self.rect.y + self.rect.height - 5), 2)
-                    
+            if keys[getattr(pygame, f"K_{char}")] and not WAS_WRITTEN[VALID_CHARACTERS.index(char)]:  # Check for lowercase letter
+                self.changeButtonText(self.text + char)
+                WAS_WRITTEN[VALID_CHARACTERS.index(char)] = True
+                return
 
-fontNameBox = pygame.font.Font(PRESS_START_2P, 24)
 
-nameInputBoxPlayerOne = NameBox(SCREEN, SCREEN_WIDTH // 2 - 150, SCREEN_HEIGHT // 2, 300, 50, fontNameBox, text=f'Player 1')
-nameInputBoxPlayerTwo = NameBox(SCREEN, SCREEN_WIDTH // 2 - 150, SCREEN_HEIGHT // 2, 300, 50, fontNameBox, text=f'Player 2')
+font = pygame.font.Font(PRESS_START_2P, 25)
+nameBoxPlayerOne = NameBox(SCREEN, SCREEN_HEIGHT / 2, SCREEN_WIDTH / 2, NAMEBOX_PNG, "Player One", font, (255, 255, 255), CYAN, 1)
+nameBoxPlayerTwo = NameBox(SCREEN, SCREEN_HEIGHT / 2, SCREEN_WIDTH / 2, NAMEBOX_PNG, "Player One", font, (255, 255, 255), CYAN, 2)
 
-nameBoxes = Boxes(nameInputBoxPlayerOne, nameInputBoxPlayerTwo)
-
-__all__ = ['nameBoxes']
+__all__ = ['nameBoxPlayerOne', 'nameBoxPlayerTwo']
