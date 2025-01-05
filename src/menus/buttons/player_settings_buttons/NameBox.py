@@ -6,10 +6,9 @@ from utils.pictures.buttons_pictures import NAMEBOX_PNG
 from utils.fonts.Fonts import PRESS_START_2P
 from utils.colors.Colors import CYAN
 from game.GameSetup import currentGameSettings
+import time
 from utils.RectButton import RectButton
 
-VALID_CHARACTERS = "abcdefghijklmnopqrstuvwxyz0123456789"
-WAS_WRITTEN = [False] * len(VALID_CHARACTERS)
 
 class NameBox(RectButton):
     def __init__(self, screen, xPos, yPos, image, text, font, color, interactColor, ownerId):
@@ -18,11 +17,20 @@ class NameBox(RectButton):
         self.ownerId = ownerId
         self.isPressed = False
         self.maxlen = 11
-        #currentGameSettings.changePlayerName(self.ownerId, self.text)
+        self.validCharaters = "abcdefghijklmnopqrstuvwxyz0123456789 "
+        self.was_written = [False] * len(self.validCharaters)
+        self.lastReset = time.time()
     
+    
+    def resetDictionary(self):
+        currentTime = time.time()
+        if (currentTime - self.lastReset > 0.05):
+            self.was_written = [False] * len(self.validCharaters)
+            self.lastReset = currentTime
     
     def performAction(self, mouseCoord, pressed):
         keys = pygame.key.get_pressed()  # Returns a list of all keys
+
         if (self.isCursorOn(mouseCoord) and pressed[0]):
             self.isPressed = True
         elif pressed[0] or keys[pygame.K_RETURN]:
@@ -40,18 +48,27 @@ class NameBox(RectButton):
             self.changeTextColor(self.color)
     
     def writing(self, keys):
-        global VALID_CHARACTERS
-        global WAS_WRITTEN
+        self.resetDictionary()
+        
         if keys[pygame.K_BACKSPACE]:
             self.changeButtonText(self.text[:-1])
             return
-        
-        for char in VALID_CHARACTERS:
+
+        for char in self.validCharaters:
+            if char == " ":
+                char = "SPACE"
             
-            if keys[getattr(pygame, f"K_{char}")] and not WAS_WRITTEN[VALID_CHARACTERS.index(char)]:  # Check for lowercase letter
-                self.changeButtonText(self.text + char)
-                WAS_WRITTEN[VALID_CHARACTERS.index(char)] = True
-                return
+            if keys[getattr(pygame, f"K_{char}")] and \
+                len(self.text) < self.maxlen:
+                if char == "SPACE":
+                    char = " "
+                
+                if not self.was_written[self.validCharaters.index(char)]:
+
+                    self.changeButtonText(self.text + char)
+                    currentGameSettings.changePlayerName(self.ownerId, self.text)
+                    self.was_written[self.validCharaters.index(char)] = True
+                    return
 
 
 font = pygame.font.Font(PRESS_START_2P, 25)
