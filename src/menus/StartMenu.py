@@ -44,6 +44,7 @@ class StartMenu(Menu):
         
     def startMenuLoop(self):
         #There are some problems here
+        #song Must enter a loop.
         #playSong(APO_SOLO_PATH_MP3)
         while self.running:
 
@@ -57,11 +58,9 @@ class StartMenu(Menu):
                 
                 mouseCoord = pygame.mouse.get_pos()
                 super().buttonsInteractions(mouseCoord)
-                
+
                 pressed = pygame.mouse.get_pressed()
                 self.performButtonActions(mouseCoord, pressed)
-                if (quitButton.isCursorOn(mouseCoord)):
-                    self.running = False
 
                         # if (settingsButton.isCursorOn(mouseCoord)):
                         #     pass 

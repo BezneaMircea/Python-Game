@@ -85,5 +85,10 @@ class RectButton():
         else:
             self.changeTextColor(self.color)
     
+    """ This method is used to perform a button action
+        Some buttons may quit a menu, (e.g. Quit, EXIT, BACK)
+        So the return value of this function is the current state
+        of the menu that owns the button (stop = True or stop = False)
+    """
     def performAction(self, mouseCoord, pressed):
-        pass
+        return False

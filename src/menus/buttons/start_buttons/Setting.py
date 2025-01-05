@@ -9,9 +9,8 @@ from utils.fonts.Fonts import PRESS_START_2P
 from utils.constants.MenuConstants import SCREEN
 from utils.RectButton import RectButton
 
-from menus.buttons.general_buttons.back import backButton
+from menus.buttons.general_buttons.back import backButtonSettings
 from menus.buttons.settings_buttons.MapSelect import mapSelection
-
 from menus.buttons.general_buttons.swipeRightButton import swipeRightButton, swipeLeftButton
 from menus.buttons.settings_buttons.Borders import mapSelectionBorders
 from menus.buttons.settings_buttons.control_bars.TimeControl import timeControl
@@ -22,19 +21,16 @@ from menus.buttons.settings_buttons.control_bars.VolumeControl import volumeCont
 class SettingButton(RectButton):
     def __init__(self, screen, xPos, yPos, image):
         super().__init__(screen, xPos, yPos, image)
+        rectButtonsSettingsMenu = [swipeRightButton, swipeLeftButton,
+                                   mapSelection, mapSelectionBorders,
+                                   timeControl, volumeControl, backButtonSettings]
+        self.settingsMenu = SettingsMenu(SCREEN, rectButtonsSettingsMenu, None)
+        
         
     def performAction(self, mouseCoord, pressed):
-        if not self.isCursorOn(mouseCoord) or not pressed[0]:
-            return
-        # rectButtonsSettingsMenu = [backButton, mapSelection, mapSelectionBorders ,swipeLeftButton,
-        #                            swipeRightButton, timeControl, volumeControl]
-        rectButtonsSettingsMenu = [backButton, swipeRightButton, swipeLeftButton,
-                                   mapSelection, mapSelectionBorders, timeControl, volumeControl]
-        
-        settingsMenu = SettingsMenu(SCREEN, rectButtonsSettingsMenu, None)
-        settingsMenu.settingsMenuLoop()
-        
-
+        if self.isCursorOn(mouseCoord) and pressed[0]:
+            self.settingsMenu.settingsMenuLoop()
+    
 
 textSettings = "Settings"
 xPosSettings = SCREEN_HEIGHT - (SCREEN_HEIGHT) / 10 - DISTANCE_BEETWEEN_BUTTONS
@@ -44,4 +40,4 @@ colorSettings = YELLOW
 settingsButton = SettingButton(SCREEN, xPosSettings, yPosSettings, BUTTON_PNG)
 settingsButton.addTextToButton(textSettings, fontSettings, colorSettings, CYAN)
 
-__all__ = ['settingsButton']
+__all__ = ['settingButton']

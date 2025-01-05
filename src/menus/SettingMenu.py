@@ -14,8 +14,7 @@ from menus.buttons.general_buttons.back import *
 # from menus.buttons.general_buttons.swipeLeftButton import swipeLeftButton
 # from menus.buttons.general_buttons.swipeRightButton import swipeRightButton
 # from menus.buttons.settings_buttons.Borders import *
-from menus.buttons.settings_buttons.control_bars.TimeControl import timeControl
-from menus.buttons.settings_buttons.control_bars.VolumeControl import volumeControl
+
 
 from game.GameSetup import *
 
@@ -27,15 +26,19 @@ titleSurface = font.render(titleText, True, YELLOW)
 titleRect = titleSurface.get_rect()
 titleRect.center = (xPosTitle, yPosTitle)
 
+
+RUNNING_SETTINGS = True
+
+
 class SettingsMenu(Menu):
     def __init__(self, screen, rectButtons, textButtons):
         super().__init__(rectButtons, textButtons)
         self.screen = screen
     
     def settingsMenuLoop(self):
-
-        running = True
-        while running:
+        
+        self.running = True
+        while self.running:
             
             SCREEN.blit(BACK_GROUND_JPEG, (0, 0))
             SCREEN.blit(titleSurface, titleRect)
@@ -43,7 +46,7 @@ class SettingsMenu(Menu):
             for event in pygame.event.get():
                 
                 if event.type == pygame.QUIT:
-                    running = False
+                    self.running = False
                     pygame.quit()
                 
                 mouseCoord = pygame.mouse.get_pos()
@@ -51,8 +54,8 @@ class SettingsMenu(Menu):
                 
                 pressed = pygame.mouse.get_pressed()
                 self.performButtonActions(mouseCoord, pressed)
-                if (backButton.isCursorOn(mouseCoord)):
-                    running = False
+                # if (backButton.isCursorOn(mouseCoord)):
+                #     self.running = False
 
             
             super().drawAllButtons()
