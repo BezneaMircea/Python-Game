@@ -1,8 +1,6 @@
-import pygame
-from utils.colors.Colors import YELLOW, CYAN
 from menus.buttons.start_buttons.Setting import settingsButton
-from utils.fonts.Fonts import PRESS_START_2P
-from utils.pictures.buttons_pictures import BUTTON_PNG
+from utils.pictures.menu_pictures import BACK_GROUND_JPEG
+
 
 from utils.constants.MenuConstants import *
 from menus.StartMenu import StartMenu
@@ -10,6 +8,8 @@ from menus.buttons.start_buttons.Quit import *
 from menus.buttons.start_buttons.PlayerTwo import *
 from menus.buttons.start_buttons.PlayerOne import *
 from menus.buttons.start_buttons.Play import *
+
+from menus.StartMenu import startMenuText
 
 
 class Game():
@@ -21,8 +21,9 @@ class Game():
     def start(self):
         rectButtonsStartMenu = [quitButton, playButton, settingsButton,
                                 playerOneButton, playerTwoButton]
-        startMenu = StartMenu(SCREEN, rectButtonsStartMenu, None)
-        startMenu.startMenuLoop()
+        titleStartMenuButtons = [startMenuText]
+        startMenu = StartMenu(rectButtonsStartMenu, titleStartMenuButtons, BACK_GROUND_JPEG)
+        startMenu.startMenu()
 
 
 

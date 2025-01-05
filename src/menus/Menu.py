@@ -6,9 +6,10 @@ class Menu():
         textButtons are a lists of RectButtons and TextButtons
         (see utils) 
     """
-    def __init__(self, rectButtons, textButtons):
+    def __init__(self, rectButtons, textButtons, backGroundPicture):
         self.rectButtons = rectButtons
         self.textButtons = textButtons
+        self.backGroundPicture = backGroundPicture
         self.running = True
 
     def drawAllRectButtons(self):
@@ -23,7 +24,7 @@ class Menu():
             return
 
         for textButton in self.textButtons:
-            textButton.drawButton()
+            textButton.displayText()
             
     def drawAllButtons(self):
         self.drawAllRectButtons()
@@ -42,43 +43,27 @@ class Menu():
     def stopMenu(self):
         self.running = False
     
-    def addButton(self, button):
-        self.rectButtons.insert(0, button)
-        
-        
-    # def menuLoop(self):
-    #             while self.running:
+    def startMenu(self):
+        self.running = True
+        self.menuLoop()
+    
+    def menuLoop(self):
+        while self.running:
 
-    #         SCREEN.blit(BACK_GROUND_JPEG, (0, 0))
-    #         SCREEN.blit(titleSurface, titleRect)    
+            SCREEN.blit(self.backGroundPicture, (0, 0))  
             
-    #         for event in pygame.event.get():        
+            for event in pygame.event.get():        
                 
-    #             if event.type == pygame.QUIT:
-    #                 self.running = False
+                if event.type == pygame.QUIT:
+                    self.running = False
+                    pygame.quit()
                 
-    #             mouseCoord = pygame.mouse.get_pos()
-    #             super().buttonsInteractions(mouseCoord)
+                mouseCoord = pygame.mouse.get_pos()
+                pressed = pygame.mouse.get_pressed()
 
-    #             pressed = pygame.mouse.get_pressed()
-    #             self.performButtonActions(mouseCoord, pressed)
-
-    #                     # if (settingsButton.isCursorOn(mouseCoord)):
-    #                     #     pass 
-    #                     #     # settingsMenu()
-                    
-
-    #                     # if (playerOneButton.isCursorOn(mouseCoord)):
-    #                     #     pass 
-    #                     #     # playerMenu("Player One", 1)
-                        
-    #                     # if (playerTwoButton.isCursorOn(mouseCoord)):
-    #                     #     pass 
-    #                     #     # playerMenu("Player Two", 2)
-
-    #         super().drawAllButtons()
+                self.buttonsInteractions(mouseCoord)
+                self.performButtonActions(mouseCoord, pressed)
+            self.drawAllButtons()
             
 
-    #         pygame.display.update()  
-                
-    #     pygame.quit()
+            pygame.display.update()  

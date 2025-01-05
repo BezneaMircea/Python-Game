@@ -2,6 +2,7 @@ import pygame
 
 from utils.constants.MenuConstants import *
 from utils.pictures.buttons_pictures import *
+from utils.pictures.menu_pictures import BACK_GROUND_JPEG
 from menus.SettingMenu import SettingsMenu
 
 from utils.colors.Colors import YELLOW, CYAN
@@ -16,6 +17,8 @@ from menus.buttons.settings_buttons.Borders import mapSelectionBorders
 from menus.buttons.settings_buttons.control_bars.TimeControl import timeControl
 from menus.buttons.settings_buttons.control_bars.VolumeControl import volumeControl
 
+from menus.SettingMenu import settingsMenuText
+
 
 
 class SettingButton(RectButton):
@@ -24,12 +27,14 @@ class SettingButton(RectButton):
         rectButtonsSettingsMenu = [swipeRightButton, swipeLeftButton,
                                    mapSelection, mapSelectionBorders,
                                    timeControl, volumeControl, backButtonSettings]
-        self.settingsMenu = SettingsMenu(SCREEN, rectButtonsSettingsMenu, None)
+        textButtonsSettingsMenu = [settingsMenuText]
+        self.settingsMenu = SettingsMenu(rectButtonsSettingsMenu, textButtonsSettingsMenu, BACK_GROUND_JPEG)
         
         
     def performAction(self, mouseCoord, pressed):
         if self.isCursorOn(mouseCoord) and pressed[0]:
-            self.settingsMenu.settingsMenuLoop()
+            self.settingsMenu.startMenu()
+        
     
 
 textSettings = "Settings"
