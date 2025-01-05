@@ -23,8 +23,8 @@ class SettingButton(RectButton):
     def __init__(self, screen, xPos, yPos, image):
         super().__init__(screen, xPos, yPos, image)
         
-    def performAction(self, mouseCoord):
-        if not self.isCursorOn(mouseCoord):
+    def performAction(self, mouseCoord, pressed):
+        if not self.isCursorOn(mouseCoord) or not pressed[0]:
             return
         # rectButtonsSettingsMenu = [backButton, mapSelection, mapSelectionBorders ,swipeLeftButton,
         #                            swipeRightButton, timeControl, volumeControl]

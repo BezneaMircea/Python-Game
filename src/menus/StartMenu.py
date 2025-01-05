@@ -40,13 +40,12 @@ class StartMenu(Menu):
     def __init__(self, screen, rectButtons, textButtons):
         super().__init__(rectButtons, textButtons)
         self.screen = screen
+    
         
     def startMenuLoop(self):
         #There are some problems here
         #playSong(APO_SOLO_PATH_MP3)
-        
-        running = True
-        while running:
+        while self.running:
 
             SCREEN.blit(BACK_GROUND_JPEG, (0, 0))
             SCREEN.blit(titleSurface, titleRect)    
@@ -54,27 +53,20 @@ class StartMenu(Menu):
             for event in pygame.event.get():        
                 
                 if event.type == pygame.QUIT:
-                    running = False
+                    self.running = False
                 
                 mouseCoord = pygame.mouse.get_pos()
                 super().buttonsInteractions(mouseCoord)
-
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    isLeftButtonPressed = pygame.mouse.get_pressed()[0]
-                    
-                    if isLeftButtonPressed:
-                        self.performButtonActions(mouseCoord)
-                        if (quitButton.isCursorOn(mouseCoord)):
-                            running = False
+                
+                pressed = pygame.mouse.get_pressed()
+                self.performButtonActions(mouseCoord, pressed)
+                if (quitButton.isCursorOn(mouseCoord)):
+                    self.running = False
 
                         # if (settingsButton.isCursorOn(mouseCoord)):
                         #     pass 
                         #     # settingsMenu()
                     
-                        # if (playButton.isCursorOn(mouseCoord)):
-                        #     pass 
-                        #     # game = Game(currentGameSettings)
-                        #     # game.start()
 
                         # if (playerOneButton.isCursorOn(mouseCoord)):
                         #     pass 

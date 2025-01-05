@@ -85,5 +85,5 @@ class RectButton():
         else:
             self.changeTextColor(self.color)
     
-    def performAction(self, mouseCoord):
+    def performAction(self, mouseCoord, pressed):
         pass

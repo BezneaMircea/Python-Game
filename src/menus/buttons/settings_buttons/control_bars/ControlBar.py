@@ -1,4 +1,9 @@
-import pygame
+# This is a global variable for control bars. Obviously
+# only one control bar should move at a time.
+# Introduced to fix the case where left mouse button is pressed
+# a bar is selected and then cursor is dragged to another bar
+# resuling in both bars to be pressed simultaniously.
+OTHER_CONTROL_BAR_IN_USE = False
 
 class ControlBar():
     def __init__(self, bar, barButton, textButton, leftMax,
@@ -44,12 +49,16 @@ class ControlBar():
     def interactWithCursor(self, mouseCoord):
         pass
 
-    def performAction(self, mouseCoord):
-        pressedMouse = pygame.mouse.get_pressed()
-        if (self.barButton.isCursorOn(mouseCoord) and pressedMouse[0]):
+    def performAction(self, mouseCoord, pressed):
+        global OTHER_CONTROL_BAR_IN_USE
+        if (self.barButton.isCursorOn(mouseCoord) and pressed[0] and not OTHER_CONTROL_BAR_IN_USE):
             self.isPressed = True
+            OTHER_CONTROL_BAR_IN_USE = True
         
-        if not pressedMouse[0]:
+        if not pressed[0]:
+            if self.isPressed:
+                OTHER_CONTROL_BAR_IN_USE = False
+            
             self.isPressed = False
         
         if self.isPressed:

@@ -28,8 +28,8 @@ class SwipeButtonLeft(SwipeButton):
         super().__init__(screen, xPos, yPos, image, imageBig)
         self.objectToSwipe = objectToSwipe
     
-    def performAction(self, mouseCoord):
-        if self.isCursorOn(mouseCoord):
+    def performAction(self, mouseCoord, pressed):
+        if self.isCursorOn(mouseCoord) and pressed[0]:
             self.objectToSwipe.changeWithTableOnLeft()
 
 class SwipeButtonRight(SwipeButton):
@@ -37,8 +37,8 @@ class SwipeButtonRight(SwipeButton):
         super().__init__(screen, xPos, yPos, image, imageBig)
         self.objectToSwipe = objectToSwipe
     
-    def performAction(self, mouseCoord):
-        if self.isCursorOn(mouseCoord):
+    def performAction(self, mouseCoord, pressed):
+        if self.isCursorOn(mouseCoord) and pressed[0]:
             self.objectToSwipe.changeWithTableOnRight()
 
 

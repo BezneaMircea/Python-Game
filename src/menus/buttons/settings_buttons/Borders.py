@@ -44,7 +44,7 @@ class MapSelectionBorders():
     def interactWithCursor(self, mouseCoord):
         pass
 
-    def performAction(self, mouseCoord):
+    def performAction(self, mouseCoord, pressed):
         pass
 
 

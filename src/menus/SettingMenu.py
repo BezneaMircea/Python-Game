@@ -35,9 +35,6 @@ class SettingsMenu(Menu):
     def settingsMenuLoop(self):
 
         running = True
-
-        isPressedTime = False
-        isPressedVolume = False
         while running:
             
             SCREEN.blit(BACK_GROUND_JPEG, (0, 0))
@@ -52,37 +49,11 @@ class SettingsMenu(Menu):
                 mouseCoord = pygame.mouse.get_pos()
                 super().buttonsInteractions(mouseCoord)
                 
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    isLeftButtonPressed = pygame.mouse.get_pressed()[0]
-                    
-                    if isLeftButtonPressed:
-                        self.performButtonActions(mouseCoord)
-                        if (backButton.isCursorOn(mouseCoord)):
-                            running = False
+                pressed = pygame.mouse.get_pressed()
+                self.performButtonActions(mouseCoord, pressed)
+                if (backButton.isCursorOn(mouseCoord)):
+                    running = False
 
-            
-                # mouseCoord = pygame.mouse.get_pos()
-                # pressedMouse = pygame.mouse.get_pressed()
-                
-                
-                # if (timeControl.barButton.isCursorOn(mouseCoord) and pressedMouse[0]
-                #     and not isPressedVolume):
-                #     isPressedTime = True
-                
-                # if (volumeControl.barButton.isCursorOn(mouseCoord) and pressedMouse[0]
-                #     and not isPressedTime):
-                #     isPressedVolume = True
-                    
-                
-                # if not pressedMouse[0]:
-                #     isPressedTime = False
-                #     isPressedVolume = False
-
-                # if (isPressedTime):
-                #     timeControl.move(mouseCoord)
-                
-                # if (isPressedVolume):
-                #     volumeControl.move(mouseCoord)
             
             super().drawAllButtons()
             

@@ -6,6 +6,7 @@ class Menu():
     def __init__(self, rectButtons, textButtons):
         self.rectButtons = rectButtons
         self.textButtons = textButtons
+        self.running = True
 
     def drawAllRectButtons(self):
         if self.rectButtons == None:
@@ -29,6 +30,9 @@ class Menu():
         for rectButton in self.rectButtons:
             rectButton.interactWithCursor(mouseCoord)
     
-    def performButtonActions(self, mouseCoord):
+    def performButtonActions(self, mouseCoord, pressed):
         for rectButton in self.rectButtons:
-            rectButton.performAction(mouseCoord)
+            rectButton.performAction(mouseCoord, pressed)
+        
+    def stopGame(self):
+        self.running = False

@@ -40,8 +40,6 @@ class TimeControlBar(ControlBar):
         self.currentValue = self.originalValue + round((self.unit * (self.barButton.yPos - self.originalPos)))
 
 
-    def performAction(self, mouseCoord):
-        pass
 
     
     
