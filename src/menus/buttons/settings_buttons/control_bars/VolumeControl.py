@@ -5,7 +5,7 @@ from utils.colors.Colors import *
 from menus.buttons.settings_buttons.control_bars.ControlBar import ControlBar
 from utils.RectButton import RectButton
 from utils.TextButton import TextButton
-import pygame
+from utils.music.Music import music
 
 X_POS = SCREEN_HEIGHT / 4
 Y_POS = SCREEN_WIDTH / 2
@@ -13,9 +13,9 @@ Y_POS = SCREEN_WIDTH / 2
 DISTANCE_BEETWEEN_BARS = 80
 
 volumeBar = RectButton(SCREEN, X_POS + DISTANCE_BEETWEEN_BARS, Y_POS, BARA_PNG)
-volumeButton = RectButton(SCREEN, X_POS + DISTANCE_BEETWEEN_BARS, Y_POS, SCROLL_BUTTON_PNG)
+volumeButton = RectButton(SCREEN, X_POS + DISTANCE_BEETWEEN_BARS, Y_POS - 116, SCROLL_BUTTON_PNG)
 volumeText = TextButton(SCREEN, X_POS + DISTANCE_BEETWEEN_BARS, Y_POS - 320, 'Volume:', PRESS_START_2P, 24, PURPLE)
-volumeValueButton = TextButton(SCREEN, X_POS + DISTANCE_BEETWEEN_BARS, Y_POS + 300, "0.50", PRESS_START_2P, 20, PURPLE)
+volumeValueButton = TextButton(SCREEN, X_POS + DISTANCE_BEETWEEN_BARS, Y_POS + 300, "0.25", PRESS_START_2P, 20, PURPLE)
 
 
 class VolumeControlBar(ControlBar):
@@ -44,8 +44,8 @@ class VolumeControlBar(ControlBar):
 
     def computeValue(self):
         self.currentValue = round(self.originalValue + self.unit * (self.barButton.yPos - self.originalPos), 2)
-        pygame.mixer.music.set_volume(self.currentValue)
-            
-volumeControl = VolumeControlBar(volumeBar, volumeButton, volumeText, Y_POS - 230, Y_POS + 230, volumeValueButton, 0.5, 1, 0)
+        music.setVolume(self.currentValue)
+
+volumeControl = VolumeControlBar(volumeBar, volumeButton, volumeText, Y_POS - 230, Y_POS + 230, volumeValueButton, 0.25, 1, 0)
 
 __all__ = ['volumeControl']
