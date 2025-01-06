@@ -5,7 +5,7 @@ from utils.pictures.buttons_pictures import *
 from game.Game import Game
 from game.GameSetup import currentGameSettings
 
-from utils.colors.Colors import YELLOW, CYAN
+from utils.colors.Colors import YELLOW, LIME_GREEN
 from utils.constants.MenuConstants import *
 from utils.fonts.Fonts import PRESS_START_2P
 from utils.constants.MenuConstants import SCREEN
@@ -27,7 +27,7 @@ yPosPlay = SCREEN_WIDTH / 2
 playButton = Play(SCREEN, xPosPlay, yPosPlay, BUTTON_PNG)
 
 playFont = pygame.font.FontType(PRESS_START_2P, 35)
-playButton.addTextToButton('Play', playFont, YELLOW, CYAN)
+playButton.addTextToButton('Play', playFont, YELLOW, LIME_GREEN)
 
 
 __all__ = ['playButton']

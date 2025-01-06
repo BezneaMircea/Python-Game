@@ -28,7 +28,6 @@ install: $(ACTIVATE) get-pip
 run: $(ACTIVATE)
 	@echo "Running the game from the src directory..."
 	@cd $(SRC_DIR) && call $(VENV2)\Scripts\activate.bat && $(PYTHON) $(MAIN)
-	make clean
 
 # Freeze dependencies into requirements.txt
 freeze: $(ACTIVATE)
