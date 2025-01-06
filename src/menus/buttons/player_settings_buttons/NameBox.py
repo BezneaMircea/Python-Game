@@ -32,6 +32,14 @@ class NameBox(RectButton):
             self.was_written = [False] * len(self.validCharaters)
             self.lastReset = currentTime
 
+    def interactWithCursor(self, mouseCoord):
+        if (self.isPressed or self.isCursorOn(mouseCoord)):
+            auxColor = self.color
+            self.changeTextColor(self.interactColor)
+            self.color = auxColor
+        else:
+            self.changeTextColor(self.color)
+
     def performAction(self, mouseCoord, pressed):
         keys = pygame.key.get_pressed()
 
