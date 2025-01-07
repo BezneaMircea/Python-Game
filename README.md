@@ -25,8 +25,7 @@ program can be found in the **StartGame.py** file.
 > * **game package** -> the source code for the actual game logic
 > * **menus package** -> the source code for the cofiguration menus logic
 > * **utils** -> package containing constans/pictures/music and most importantly  
-two util classes **RectButton** representing a default button having a picture that   
-can also include a text and **TextButton** just a text button, no picture
+two util classes **RectButton**, **TextButton**
 
 ## How to use:
 
@@ -83,3 +82,46 @@ At last just run from the **src** directory **python3 StartGame.py** and have fu
 *Name Input Box:*
    - Created an interactive **text input field** for players to set their in-game names. This includes support for keyboard input and a character limit to ensure consistent display during gameplay.
    - Designed a blinking **cursor system** for visual feedback while the name box is active.
+
+#### ***Challenges Faced***:
+
+- **Puck Physics and Collisions**: Developing realistic physics for puck movement, particularly ensuring proper collision detection between paddles and walls, was a tricky task. We had to fine-tune collision detection to avoid the puck "glitching" at fast speeds or staying stuck on edges.
+
+- **Name Box for player name Integration**: Blinking cursor implementation was challenging, as we had to ensure the cursor was displayed correctly and synchronized with the player's input. The position of the cursor had to be updated dynamically based on the player's input especially when the player deleted characters.
+
+---
+
+### Mircea's part
+
+#### ***Menu Design and Components***:
+
+1. *Menu System Development:*
+   - Developed the **menus package**, which handles the logic of multiple game menus, including the main menu, settings menu and specific player menus.
+   - Implemented essential components in **utils** package, such as **RectButton** and **TextButton**, where:
+     - **RectButton** supports both images and text, used for interactive buttons throughout the game menus.
+     - **TextButton** is a simpler button that contains just text, suitable for various menu options.
+   - Created several configuration menus:
+     - **Main Menu** to start the game or access settings.
+     - **Game Settings Menu** to customize the gameplay environment.
+     - **Player Settings Menus** to define players’ preferences and configurations.
+
+2. *Game Settings Features:*
+   - Integrated **swipe buttons** for customizing game options, such as:
+     - Selecting the map to play on, allowing players to pick different tables for their game.
+     - Selecting the paddles, giving players an option to choose between different paddles.
+
+3. *In-Game Countdown and Timer:*
+   - Designed and implemented a **countdown timer** displayed at the beginning of the game.
+   - Developed a **real-time game timer** visible during the match, which dynamically updates to show the current game time.
+   - Introduced a **red alert system** where the last 30 seconds of the game are displayed in red.
+
+4. *Settings Menu Features:*
+   - Built two **control bars** in the settings menu:
+     - **Match Duration**, to control the length of the game, allowing players to adjust the game time to their preference.
+     - **Music Volume**, enabling players to set the volume of the song played during the game.
+
+#### ***Challenges Faced***:
+
+- **Refactoring Game Logic**: At one point, we attempted to decouple the game logic into more modular classes, which required a significant refactor of the existing code. This restructuring process posed challenges as we needed to ensure that the refactored classes would integrate smoothly and function correctly across different parts of the game.
+
+- **Utility Classes Implementation**: Initially, the process of working without utility classes like **RectButton** and **TextButton** was more difficult. Once these classes were implemented, they simplify many areas of the code. These utility classes helped remove redundant code and provided a cleaner architecture for handling menus and buttons.
