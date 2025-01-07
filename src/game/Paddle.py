@@ -1,10 +1,10 @@
 from utils.constants.MenuConstants import *
-from utils.pictures.paddle_pictures import *
-from game.Puck import *
+from utils.pictures.paddle_pictures import DEFAULT_PADDLE_PNG
+from game.Puck import puck
 import math
 
 # Paddle radius
-PADDLE_RADIUS = BLUE_PADDLE_PNG.get_width() // 2
+PADDLE_RADIUS = DEFAULT_PADDLE_PNG.get_width() // 2
 
 class Paddle():
     def __init__(self, screen, x, y, radius, image, speed, margins):

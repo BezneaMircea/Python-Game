@@ -1,5 +1,5 @@
 from utils.constants.MenuConstants import *
-from utils.pictures.gate_picture import *
+from utils.pictures.gate_picture import GATE_PNG
 
 class Gate():
     def __init__(self, screen, x, y, image):
