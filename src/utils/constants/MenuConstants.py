@@ -11,7 +11,7 @@ pygame.init()
 SCREEN = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 # Initial puck speed
-INITIAL_PUCK_SPEED = 5
+INITIAL_PUCK_SPEED = 15
 
 # Epsilon for collision (error margin)
 EPSILON = 3
