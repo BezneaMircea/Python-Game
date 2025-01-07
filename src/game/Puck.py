@@ -51,9 +51,6 @@ class Puck():
 			self.dy = math.sin(collisionAngle) * self.speed
 
 	def move(self):
-		self.x += self.dx
-		self.y += self.dy
-
 		# Colisions with left and right margins
 		if self.x - self.radius <= self.margins[0] or self.x + self.radius >= self.margins[1]:
 			self.dx = -self.dx  # Switch direction on the OX axis
@@ -72,6 +69,9 @@ class Puck():
 			elif self.y + self.radius >= self.margins[3]:
 				self.y = self.margins[3] - self.radius
 
+		self.x += self.dx
+		self.y += self.dy
+
 		# We make sure the puck doesn't exceed the table's limits
 		self.canMove()
 		
@@ -79,25 +79,26 @@ class Puck():
 		self.x = max(self.margins[0], min(self.x, self.margins[1]))
 		self.y = max(self.margins[2], min(self.y, self.margins[3]))
 
-	def resetPaddles(self, paddlePlayerOne, paddlePlayerTwo):
-		"""Reset puck and paddle positions after a goal"""
-		paddlePlayerOne.resetPosition()
-		paddlePlayerTwo.resetPosition()
-
 	def goalVerify(self, playerOne, playerTwo):
 		"""Check if the puck enters a goal and handle the state changes."""
 		isGoal = False
 		if GOAL_TOP <= self.y <= GOAL_BOTTOM:
 			if self.x - self.radius <= self.margins[0]:
 				playerTwo.increaseScore()
-				self.resetPaddles(playerOne.paddle, playerTwo.paddle)
+				
+				playerOne.paddle.resetPosition()
+				playerTwo.paddle.resetPosition()
+				
 				self.resetPlayerOnePuckPosition()
 				isGoal = True
 				# Goal for Player 2
 				# Increment Player 2's score
 			elif self.x + self.radius >= self.margins[1]:
 				playerOne.increaseScore()
-				self.resetPaddles(playerOne.paddle, playerTwo.paddle)
+
+				playerOne.paddle.resetPosition()
+				playerTwo.paddle.resetPosition()
+
 				self.resetPlayerTwoPuckPosition()
 				# Goal for Player 1
 				# Increment Player 1's score
